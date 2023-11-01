@@ -1,7 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import { PORT } from './config';
-import routes from './routes';
+import { router } from './routes';
 
 const app = express();
 
@@ -10,4 +10,4 @@ app.listen(PORT, () => {
 });
 app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json({ type: ['text/plain'] }));
-app.use(routes);
+app.use(router);

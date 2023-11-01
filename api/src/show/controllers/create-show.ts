@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { createShowDocument } from '../data-access/createShow';
-import { buildShow } from '../helpers/buildShow';
+import { createShowDocument } from '../data-access/create-show';
+import { buildShow } from '../helpers/build-show';
 
 export async function createShow(req: Request, res: Response) {
   try {
