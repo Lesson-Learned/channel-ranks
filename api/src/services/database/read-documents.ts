@@ -8,17 +8,19 @@ export async function readDocuments<D extends Document>(
 ): Promise<WithId<D>[]> {
   const client = new MongoClient(DATABASE_URI);
 
-  await client.connect();
+  try {
+    await client.connect();
 
-  const database = client.db(DATABASE_NAME);
-  const collection = database.collection<D>(collectionName);
+    const database = client.db(DATABASE_NAME);
+    const collection = database.collection<D>(collectionName);
 
-  const docs = await collection.find({ ...options.query }, {
-    limit: options.limit,
-    sort: options.sort
-  }).toArray();
+    const docs = await collection.find({ ...options.query }, {
+      limit: options.limit,
+      sort: options.sort
+    }).toArray();
 
-  await client.close();
-
-  return docs;
+    return docs;
+  } finally {
+    await client.close();
+  }
 }
