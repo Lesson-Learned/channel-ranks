@@ -1,5 +1,5 @@
-export { createDocument } from './database/createDocument';
-export { deleteDocument } from './database/deleteDocument';
-export { readDocuments } from './database/readDocuments';
+export { createDocument } from './database/create-document';
+export { deleteDocument } from './database/delete-document';
+export { readDocuments } from './database/read-documents';
 export * from './database/types';
-export { updateDocument } from './database/updateDocument';
+export { updateDocument } from './database/update-document';
