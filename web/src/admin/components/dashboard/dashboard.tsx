@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
-import { Content } from './components/content';
-import { Header } from './components/header';
-import { Navigation } from './components/navigation';
+import { Content } from './content';
 import css from './dashboard.module.css';
+import { Header } from './header';
+import { Navigation } from './navigation';
 
 interface Props {
   children: ReactNode;

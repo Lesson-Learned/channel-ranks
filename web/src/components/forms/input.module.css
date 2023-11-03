@@ -1,0 +1,12 @@
+.container {
+  border: 2px solid #000;
+  font-size: 1.38rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+.container:disabled {
+  cursor: not-allowed;
+}
+.container:focus {
+  outline: none;
+}

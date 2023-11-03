@@ -1,0 +1,13 @@
+.form {
+  padding: 1rem;
+}
+
+.input {
+  margin-bottom: 1rem;
+}
+
+.label {
+  display: inline-block;
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+}

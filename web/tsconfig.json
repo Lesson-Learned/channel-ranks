@@ -16,6 +16,7 @@
     "baseUrl": "./",
     "paths": {
       "@admin": ["src/admin"],
+      "@components": ["src/components"],
       "@shared": ["src/shared"]
     },
 
