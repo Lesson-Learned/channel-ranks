@@ -1,0 +1,9 @@
+.container {
+  background-color: #eee;
+  flex-grow: 1;
+  padding: 1rem 1.4rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
