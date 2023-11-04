@@ -8,7 +8,7 @@ export async function createShow(req: Request, res: Response) {
 
     await createShowDocument(show);
 
-    res.status(200).send(show);
+    res.status(201).send(show);
   } catch {
     res.sendStatus(500);
   }
