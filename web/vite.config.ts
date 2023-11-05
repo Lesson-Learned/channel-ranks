@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@admin': resolve(__dirname, './src/admin'),
+      '@api': resolve(__dirname, './src/api'),
       '@components': resolve(__dirname, './src/components'),
       '@shared': resolve(__dirname, './src/shared')
     }

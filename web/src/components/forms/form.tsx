@@ -4,9 +4,7 @@ interface Props extends Omit<HTMLProps<HTMLFormElement>, 'onSubmit'> {
   onSubmit(): void;
 }
 
-export function Form(props: Props) {
-  const { onSubmit, ...formProps } = props;
-
+export function Form({ onSubmit, ...formProps }: Props) {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 

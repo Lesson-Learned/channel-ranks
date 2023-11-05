@@ -6,9 +6,7 @@ interface Props extends Omit<HTMLProps<HTMLInputElement>, 'onChange'> {
   onChange(value: string): void;
 }
 
-export function Input(props: Props) {
-  const { onChange, ...inputProps } = props;
-
+export function Input({ onChange, ...inputProps }: Props) {
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     onChange(event.target.value);
   }
