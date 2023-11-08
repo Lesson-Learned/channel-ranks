@@ -1,10 +1,10 @@
-import { AddShow } from '@admin';
+import { CreateShow } from '@admin';
 import { PageTitle } from '@shared';
 
-export function AdminAddShowPage() {
+export function CreateShowPage() {
   return (
     <PageTitle title="Add TV Show">
-      <AddShow />
+      <CreateShow />
     </PageTitle>
   );
 }

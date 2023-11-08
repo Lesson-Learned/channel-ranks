@@ -5,17 +5,18 @@ import { Header } from './header';
 import { Navigation } from './navigation';
 
 interface Props {
+  action?: ReactNode;
   children: ReactNode;
   title: string;
 }
 
-export function Dashboard({ children, title }: Props) {
+export function Dashboard({ action, children, title }: Props) {
   return (
     <div className={ css.container }>
       <Header />
       <div className={ css.body }>
         <Navigation />
-        <Content title={ title }>
+        <Content action={ action } title={ title }>
           { children }
         </Content>
       </div>

@@ -5,7 +5,7 @@ export async function updateShow(
   id: string,
   updates: Partial<Show>
 ): Promise<Partial<Show>> {
-  const route = new URL(id, SHOWS_URL);
+  const route = new URL(`${ SHOWS_URL }/${ id }`);
 
   const response = await fetch(route, {
     body: JSON.stringify(updates),

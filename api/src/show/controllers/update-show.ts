@@ -8,7 +8,7 @@ export async function updateShow(req: Request, res: Response) {
 
     await updateShowDocument(
       new ObjectId(req.params.id),
-      updates
+      { $set: updates }
     );
 
     res.status(200).send(updates);

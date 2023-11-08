@@ -1,0 +1,6 @@
+.container {
+  background-color: #fff;
+  display: flex;
+  font-size: 1.2rem;
+  padding: 0.6rem;
+}

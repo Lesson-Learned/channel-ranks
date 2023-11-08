@@ -1,7 +1,7 @@
 import { SHOWS_URL } from '../constants';
 import { Show } from '../types';
 
-export async function createShow(show: Show): Promise<Show> {
+export async function createShow(show: Omit<Show, '_id'>): Promise<Show> {
   const route = new URL(SHOWS_URL);
 
   const response = await fetch(route, {

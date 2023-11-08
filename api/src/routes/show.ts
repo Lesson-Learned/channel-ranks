@@ -18,4 +18,4 @@ router.patch('/:id', updateShow);
 
 router.delete('/:id', deleteShow);
 
-export { router as showRouter };
+export default router;

@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { showRouter } from './show';
+import showRouter from './show';
 
 const router = Router();
 
@@ -10,4 +10,4 @@ router.use('*', (req: Request, res: Response) => {
   res.sendStatus(400);
 });
 
-export { router };
+export default router;

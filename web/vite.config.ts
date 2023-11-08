@@ -9,7 +9,8 @@ export default defineConfig({
       '@admin': resolve(__dirname, './src/admin'),
       '@api': resolve(__dirname, './src/api'),
       '@components': resolve(__dirname, './src/components'),
-      '@shared': resolve(__dirname, './src/shared')
+      '@shared': resolve(__dirname, './src/shared'),
+      '@show': resolve(__dirname, './src/show')
     }
   },
 });

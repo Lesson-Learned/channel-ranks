@@ -1,6 +1,7 @@
 import { Country, Genre, Network } from '../types';
 
 export interface Show {
+  _id: string;
   country: Country;
   description: string;
   endDate?: number;

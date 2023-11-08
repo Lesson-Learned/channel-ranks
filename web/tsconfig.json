@@ -18,7 +18,8 @@
       "@admin": ["src/admin"],
       "@api": ["src/api"],
       "@components": ["src/components"],
-      "@shared": ["src/shared"]
+      "@shared": ["src/shared"],
+      "@show": ["src/show"]
     },
 
     /* Linting */
