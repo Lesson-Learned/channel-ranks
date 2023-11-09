@@ -1,6 +1,7 @@
 import { Countries, Genres, Networks } from '@api';
 import { Form, Input, Label, Select, TextArea } from '@components';
 import { ShowFormHook } from '../hooks/use-show-form';
+import { Button } from './button';
 import { GenreCheckbox } from './genre-checkbox';
 import css from './show-form.module.css';
 
@@ -126,13 +127,13 @@ export function ShowForm({
         value={ form.seasonCount || '' }
       />
 
-      <button
+      <Button
         className={ css.submit }
         disabled={ loading }
         type="submit"
       >
         Save Show
-      </button>
+      </Button>
     </Form>
   );
 }
