@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { CreateShowPage } from './pages/admin/create-show';
+import { OverviewPage } from './pages/admin/overview';
 import { ReadShowsPage } from './pages/admin/read-shows';
 import { UpdateShowPage } from './pages/admin/update-show';
 import { Home } from './pages/home';
@@ -13,11 +14,12 @@ export default function App() {
 
         {/* ADMIN ROUTES */}
         <Route element={ <CreateShowPage /> } path={ AdminRoutes.AddShow } />
+        <Route element={ <OverviewPage /> } path={ AdminRoutes.Home } />
+        <Route element={ <ReadShowsPage /> } path={ AdminRoutes.Shows } />
         <Route
           element={ <UpdateShowPage /> }
           path={ AdminRoutes.Show(':id') }
         />
-        <Route element={ <ReadShowsPage /> } path={ AdminRoutes.Shows } />
 
         {/* CATCH ALL */}
         <Route element={ <div>Page not found.</div> } path="*" />
