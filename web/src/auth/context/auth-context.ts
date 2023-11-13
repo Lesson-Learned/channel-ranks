@@ -1,7 +1,7 @@
 import { User } from 'firebase/auth';
 import { createContext, useContext } from 'react';
 
-export interface AuthContextValues {
+interface AuthContextValues {
   isAdmin: boolean;
   user: User | null;
 }

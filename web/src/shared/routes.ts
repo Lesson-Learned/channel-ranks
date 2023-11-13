@@ -6,3 +6,8 @@ export const AdminRoutes = {
   },
   Shows: '/admin/shows'
 };
+
+export const Routes = {
+  Login: '/login',
+  Signup: '/signup'
+};

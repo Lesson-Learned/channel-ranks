@@ -1,4 +1,5 @@
 import { UpdateShow } from '@admin';
+import { AdminGuard } from '@auth';
 import { PageTitle } from '@shared';
 import { useShow } from '@show';
 import { useParams } from 'react-router-dom';
@@ -16,8 +17,10 @@ export function UpdateShowPage() {
   }
 
   return (
-    <PageTitle title={ showData.show.name }>
-      <UpdateShow show={ showData.show } />
-    </PageTitle>
+    <AdminGuard>
+      <PageTitle title={ showData.show.name }>
+        <UpdateShow show={ showData.show } />
+      </PageTitle>
+    </AdminGuard>
   );
 }

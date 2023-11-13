@@ -1,6 +1,7 @@
 export { readStats } from './admin/handlers/read-stats';
 export type { Stats } from './admin/types';
 export { Countries, Genres, Networks } from './constants';
+export { createProfile } from './profile/handlers/create-profile';
 export { readIsAdmin } from './profile/handlers/read-is-admin';
 export { createShow } from './show/handlers/create-show';
 export { deleteShow } from './show/handlers/delete-show';
