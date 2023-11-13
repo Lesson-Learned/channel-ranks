@@ -4,7 +4,7 @@
   "description": "",
   "main": "build/index.js",
   "scripts": {
-    "compile": "tsc && node build/index.js",
+    "compile": "tsc && node --require ./env.js build/index.js",
     "dev": "nodemon --watch src/ --exec \"npm run compile\" --verbose -e ts",
     "start": "node build/index.js"
   },

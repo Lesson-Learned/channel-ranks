@@ -1,1 +1,2 @@
-export const PORT = 8000;
+export const PORT = process.env.PORT!;
+export const SEED = process.env.SEED!;

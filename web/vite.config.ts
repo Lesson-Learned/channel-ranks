@@ -8,6 +8,7 @@ export default defineConfig({
     alias: {
       '@admin': resolve(__dirname, './src/admin'),
       '@api': resolve(__dirname, './src/api'),
+      '@auth': resolve(__dirname, './src/auth'),
       '@components': resolve(__dirname, './src/components'),
       '@shared': resolve(__dirname, './src/shared'),
       '@show': resolve(__dirname, './src/show')

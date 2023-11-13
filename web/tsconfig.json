@@ -17,6 +17,7 @@
     "paths": {
       "@admin": ["src/admin"],
       "@api": ["src/api"],
+      "@auth": ["src/auth"],
       "@components": ["src/components"],
       "@shared": ["src/shared"],
       "@show": ["src/show"]

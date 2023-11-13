@@ -1,4 +1,5 @@
 /build
 /node_modules
 
-database.ts
+env.js
+firebase-service-account.json
