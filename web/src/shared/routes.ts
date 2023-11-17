@@ -9,5 +9,6 @@ export const AdminRoutes = {
 
 export const Routes = {
   Login: '/login',
+  Shows: '/shows',
   Signup: '/signup'
 };

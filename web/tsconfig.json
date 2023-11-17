@@ -17,8 +17,10 @@
     "paths": {
       "@admin": ["src/admin"],
       "@api": ["src/api"],
+      "@assets": ["src/assets/*"],
       "@auth": ["src/auth"],
       "@components": ["src/components"],
+      "@home": ["src/home"],
       "@shared": ["src/shared"],
       "@show": ["src/show"]
     },
