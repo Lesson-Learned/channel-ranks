@@ -1,0 +1,15 @@
+.container {
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.grid {
+  display: flex;
+  gap: 1rem;
+}
+
+.title {
+  color: #fff;
+  font-size: 1.75rem;
+  margin-bottom: 0.8rem;
+}

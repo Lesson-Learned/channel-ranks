@@ -10,7 +10,7 @@ export function useShows() {
     async function run() {
       try {
         setShows(await readShows());
-      } catch (e) {
+      } catch {
         setError(true);
       } finally {
         setLoading(false);
