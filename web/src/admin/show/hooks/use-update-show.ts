@@ -2,9 +2,9 @@ import { updateShow } from '@api';
 import { AdminRoutes, ymdToMilli } from '@shared';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShowForm } from '../types/form';
+import { ShowFormFields } from '../types/form';
 
-export function useUpdateShow(showId: string, form: ShowForm) {
+export function useUpdateShow(showId: string, form: ShowFormFields) {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -13,9 +13,15 @@ export function useUpdateShow(showId: string, form: ShowForm) {
     async function handler() {
       try {
         await updateShow(showId, {
-          ...form,
+          country: form.country,
+          description: form.description,
           endDate: form.endDate ? ymdToMilli(form.endDate) : undefined,
-          releaseDate: ymdToMilli(form.releaseDate)
+          episodeCount: form.episodeCount,
+          genre: form.genre,
+          name: form.name,
+          network: form.network,
+          releaseDate: ymdToMilli(form.releaseDate),
+          seasonCount: form.seasonCount
         });
 
         navigate(AdminRoutes.Shows);

@@ -1,35 +1,35 @@
 import { Countries, Genres, Networks } from '@api';
-import { Form, Input, Label, Select, TextArea } from '@components';
-import { ShowFormHook } from '../hooks/use-show-form';
+import { FileInput, Form, Input, Label, Select, TextArea } from '@components';
+import { ShowFormInterface } from '../hooks/use-show-form';
 import { Button } from './button';
 import { GenreCheckbox } from './genre-checkbox';
 import css from './show-form.module.css';
 
 interface Props {
+  form: ShowFormInterface;
   handleSubmit(): void;
   loading: boolean;
-  showFormMap: ShowFormHook;
 }
 
-export function ShowForm({
-  handleSubmit,
-  loading,
-  showFormMap: { form, setGenre, setNumberField, setSelectField, setTextField }
-}: Props) {
+export function ShowForm({ form, handleSubmit, loading }: Props) {
   return (
     <Form
       className={ css.form }
       disabled={ loading }
       onSubmit={ handleSubmit }
     >
+      <Label className={ css.label } htmlFor="Banner" />
+      <FileInput id="Banner" onChange={ form.setFileField('banner') } />
+      <br />
+
       <Select
         className={ css.select }
         disabled={ loading }
         labelStyle={ css.label }
         labelText="Country"
-        onChange={ setSelectField('country') }
+        onChange={ form.setSelectField('country') }
         required
-        value={ form.country }
+        value={ form.fields.country }
       >
         { Countries.map(country => (
           <option key={ country } value={ country }>{ country }</option>
@@ -42,9 +42,9 @@ export function ShowForm({
         className={ css.textarea }
         disabled={ loading }
         id="Description"
-        onChange={ setTextField('description') }
+        onChange={ form.setTextField('description') }
         required
-        value={ form.description }
+        value={ form.fields.description }
       />
 
       <Label className={ css.label } htmlFor="End Date" />
@@ -52,9 +52,9 @@ export function ShowForm({
         className={ css.input }
         disabled={ loading }
         id="End Date"
-        onChange={ setTextField('endDate') }
+        onChange={ form.setTextField('endDate') }
         type="date"
-        value={ form.endDate }
+        value={ form.fields.endDate }
       />
 
       <Label className={ css.label } htmlFor="Episode Count" />
@@ -62,22 +62,22 @@ export function ShowForm({
         className={ css.input }
         disabled={ loading }
         id="Episode Count"
-        onChange={ setNumberField('episodeCount') }
+        onChange={ form.setNumberField('episodeCount') }
         required
         type="number"
-        value={ form.episodeCount || '' }
+        value={ form.fields.episodeCount || '' }
       />
 
       <fieldset className={ css.genre }>
         <legend className={ css.genreLegend }>Genre</legend>
-      { Genres.map(genre => (
-        <GenreCheckbox
-          checked={ form.genre.includes(genre) }
-          genre={ genre }
-          key={ genre }
-          onChange={ setGenre }
-        />
-      ))}
+        { Genres.map(genre => (
+          <GenreCheckbox
+            checked={ form.fields.genre.includes(genre) }
+            genre={ genre }
+            key={ genre }
+            onChange={ form.setGenre }
+          />
+        ))}
       </fieldset>
 
       <Label className={ css.label } htmlFor="Name" />
@@ -85,9 +85,9 @@ export function ShowForm({
         className={ css.input }
         disabled={ loading }
         id="Name"
-        onChange={ setTextField('name') }
+        onChange={ form.setTextField('name') }
         required
-        value={ form.name }
+        value={ form.fields.name }
       />
 
       <Select
@@ -95,9 +95,9 @@ export function ShowForm({
         disabled={ loading }
         labelStyle={ css.label }
         labelText="Network"
-        onChange={ setSelectField('network') }
+        onChange={ form.setSelectField('network') }
         required
-        value={ form.network }
+        value={ form.fields.network }
       >
         { Networks.map(network => (
           <option key={ network } value={ network }>{ network }</option>
@@ -105,15 +105,19 @@ export function ShowForm({
       </Select>
       <br />
 
+      <Label className={ css.label } htmlFor="Poster" />
+      <FileInput id="Poster" onChange={ form.setFileField('poster') } />
+      <br />
+
       <Label className={ css.label } htmlFor="Release Date" />
       <Input
         className={ css.input }
         disabled={ loading }
         id="Release Date"
-        onChange={ setTextField('releaseDate') }
+        onChange={ form.setTextField('releaseDate') }
         required
         type="date"
-        value={ form.releaseDate }
+        value={ form.fields.releaseDate }
       />
 
       <Label className={ css.label } htmlFor="Season Count" />
@@ -121,10 +125,10 @@ export function ShowForm({
         className={ css.input }
         disabled={ loading }
         id="Season Count"
-        onChange={ setNumberField('seasonCount') }
+        onChange={ form.setNumberField('seasonCount') }
         required
         type="number"
-        value={ form.seasonCount || '' }
+        value={ form.fields.seasonCount || '' }
       />
 
       <Button

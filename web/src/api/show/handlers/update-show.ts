@@ -1,9 +1,9 @@
 import { SHOWS_URL } from '../constants';
-import { Show } from '../types';
+import { Show, ShowFormFields } from '../types';
 
 export async function updateShow(
   id: string,
-  updates: Partial<Show>
+  updates: ShowFormFields
 ): Promise<Partial<Show>> {
   const route = new URL(`${ SHOWS_URL }/${ id }`);
 

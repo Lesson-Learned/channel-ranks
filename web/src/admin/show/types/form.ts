@@ -1,7 +1,13 @@
 import { Show } from '@api';
 
-export interface ShowForm
-  extends Omit<Show, '_id' | 'endDate' | 'releaseDate'> {
+export interface ShowFormFields extends Omit<Show,
+  '_id' |
+  'banner' |
+  'endDate' |
+  'poster' |
+  'releaseDate'> {
+  banner: File | null;
   endDate: string;
+  poster: File | null;
   releaseDate: string;
 }

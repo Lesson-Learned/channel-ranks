@@ -10,6 +10,7 @@ export default defineConfig({
       '@api': resolve(__dirname, './src/api'),
       '@assets': resolve(__dirname, './src/assets'),
       '@auth': resolve(__dirname, './src/auth'),
+      '@cloud': resolve(__dirname, './src/cloud'),
       '@components': resolve(__dirname, './src/components'),
       '@home': resolve(__dirname, './src/home'),
       '@shared': resolve(__dirname, './src/shared'),

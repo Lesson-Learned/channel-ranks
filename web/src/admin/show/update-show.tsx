@@ -11,16 +11,16 @@ interface Props {
 }
 
 export function UpdateShow({ show }: Props) {
-  const showFormMap = useShowForm(showToForm(show));
-  const { handleSubmit, loading } = useUpdateShow(show._id, showFormMap.form);
+  const form = useShowForm(showToForm(show));
+  const { handleSubmit, loading } = useUpdateShow(show._id, form.fields);
 
   return (
     <>
       <FormContainer>
         <ShowForm
+          form={ form }
           handleSubmit={ handleSubmit }
           loading={ loading }
-          showFormMap={ showFormMap }
         />
       </FormContainer>
 

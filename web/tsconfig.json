@@ -19,6 +19,7 @@
       "@api": ["src/api"],
       "@assets": ["src/assets/*"],
       "@auth": ["src/auth"],
+      "@cloud": ["src/cloud"],
       "@components": ["src/components"],
       "@home": ["src/home"],
       "@shared": ["src/shared"],

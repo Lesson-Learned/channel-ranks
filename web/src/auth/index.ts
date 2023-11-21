@@ -1,5 +1,6 @@
 export { useAuth } from './context/auth-context';
 export { AuthProvider } from './context/auth-provider';
+export { storage } from './config';
 export { AdminGuard } from './guards/admin-guard';
 export { GuestGuard } from './guards/guest-guard';
 export { UserGuard } from './guards/user-guard';

@@ -1,9 +1,10 @@
 import { Countries, Genre, Networks } from '@api';
 import { useState } from 'react';
-import { ShowForm } from '../types/form';
+import { ShowFormFields } from '../types/form';
 
-export function useShowForm(initialForm?: ShowForm): ShowFormHook {
-  const [form, setForm] = useState(initialForm ?? {
+export function useShowForm(initialForm?: ShowFormFields): ShowFormInterface {
+  const [fields, setFields] = useState(initialForm ?? {
+    banner: null,
     country: Countries[0],
     description: '',
     endDate: '',
@@ -11,12 +12,19 @@ export function useShowForm(initialForm?: ShowForm): ShowFormHook {
     genre: [],
     name: '',
     network: Networks[0],
+    poster: null,
     releaseDate: '',
     seasonCount: 0
   });
 
+  function setFileField(field: keyof ShowFormFields) {
+    return function handler(value: File) {
+      setFields(form => ({ ...form, [field]: value }));
+    };
+  }
+
   function setGenre(genre: Genre, checked: boolean) {
-    setForm(form => {
+    setFields(form => {
       const genres = [ ...form.genre ];
 
       if (checked) {
@@ -29,26 +37,27 @@ export function useShowForm(initialForm?: ShowForm): ShowFormHook {
     });
   }
 
-  function setNumberField(field: keyof typeof form) {
+  function setNumberField(field: keyof ShowFormFields) {
     return function handler(value: string) {
-      setForm(form => ({ ...form, [field]: Number(value) }));
+      setFields(form => ({ ...form, [field]: Number(value) }));
     };
   }
 
-  function setSelectField<T extends string>(field: keyof typeof form) {
+  function setSelectField<T extends string>(field: keyof ShowFormFields) {
     return function handler(value: T) {
-      setForm(form => ({ ...form, [field]: value }));
+      setFields(form => ({ ...form, [field]: value }));
     };
   }
 
-  function setTextField(field: keyof typeof form) {
+  function setTextField(field: keyof ShowFormFields) {
     return function handler(value: string) {
-      setForm(form => ({ ...form, [field]: value }));
+      setFields(form => ({ ...form, [field]: value }));
     };
   }
 
   return {
-    form,
+    fields,
+    setFileField,
     setGenre,
     setNumberField,
     setSelectField,
@@ -56,11 +65,12 @@ export function useShowForm(initialForm?: ShowForm): ShowFormHook {
   };
 }
 
-export interface ShowFormHook {
-  form: ShowForm;
+export interface ShowFormInterface {
+  fields: ShowFormFields;
+  setFileField(field: keyof ShowFormFields): (value: File) => void;
   setGenre(genre: Genre, checked: boolean): void;
-  setNumberField(field: keyof ShowForm): (value: string) => void;
-  setSelectField<T extends string>(field: keyof ShowForm):
+  setNumberField(field: keyof ShowFormFields): (value: string) => void;
+  setSelectField<T extends string>(field: keyof ShowFormFields):
     (value: T) => void;
-  setTextField(field: keyof ShowForm): (value: string) => void;
+  setTextField(field: keyof ShowFormFields): (value: string) => void;
 }
