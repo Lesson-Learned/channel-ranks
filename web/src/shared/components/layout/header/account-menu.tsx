@@ -22,18 +22,34 @@ export function AccountMenu() {
         G
       </button>
 
-      <dialog ref={ dialog }>
-        <button onClick={ close }>Close</button>
+      <dialog className={ css.dialog } ref={ dialog }>
+        <div className={ css.closeRow }>
+          <button className={ css.close } onClick={ close }>Close</button>
+        </div>
 
-        { isAdmin && (
-          <Link to={ AdminRoutes.Home }>Admin</Link>
-        )}
+        <h2 className={ css.greeting }>Hello,</h2>
 
-        { user ? (
-          <button onClick={ logout }>Log Out</button>
-        ) : (
-          <Link to={ Routes.Signup }>Sign Up</Link>
-        )}
+        <div className={ css.actions }>
+          { user ? (
+            <>
+              { isAdmin && (
+                <Link className={ css.action } to={ AdminRoutes.Home }>
+                  Admin
+                </Link>
+              )}
+              <button className={ css.action } onClick={ logout }>
+                Log Out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link className={ css.action } to={ Routes.Login }>Log In</Link>
+              <Link className={ css.action } to={ Routes.Signup }>
+                Sign Up
+              </Link>
+            </>
+          )}
+        </div>
       </dialog>
     </>
   );

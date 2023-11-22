@@ -1,7 +1,5 @@
-import { Link } from 'react-router-dom';
-import { Routes } from '../../../routes';
-import { AccountMenu } from './account-menu';
 import css from './index.module.css';
+import { Navigation } from './navigation';
 
 export function LayoutHeader() {
   return (
@@ -11,12 +9,7 @@ export function LayoutHeader() {
         <span className={ css.logoRanks }>Ranks</span>
       </h1>
 
-      <nav className={ css.links }>
-        <Link className={ css.link } to="/">Home</Link>
-        <Link className={ css.link } to={ Routes.Shows }>Shows</Link>
-      </nav>
-
-      <AccountMenu />
+      <Navigation />
     </header>
   );
 }
