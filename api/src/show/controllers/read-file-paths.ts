@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getShowBannerPath, getShowPosterPath } from '../../services';
+import { getShowBannerPath, getShowPosterPath } from '../../services/cloud';
 
 export async function readFilePaths(req: Request, res: Response) {
   try {

@@ -1,6 +1,6 @@
 import { WithId } from 'mongodb';
 import { SHOW_COLLECTION } from '../../config';
-import { readDocuments, ReadOptions } from '../../services';
+import { readDocuments, ReadOptions } from '../../services/database';
 import { Show } from '../models/show';
 
 export async function readShowDocuments(

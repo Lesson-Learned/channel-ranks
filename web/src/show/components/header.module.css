@@ -1,0 +1,17 @@
+.container {
+  margin-bottom: 2rem;
+}
+
+.description {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 500;
+  max-width: 700px;
+  width: 100%;
+}
+
+.name {
+  color: #fff;
+  font-size: 10vmin;
+  margin-bottom: 1rem;
+}

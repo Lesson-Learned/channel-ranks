@@ -1,5 +1,5 @@
 import { PROFILE_COLLECTION } from '../../config';
-import { readDocuments, ReadOptions } from '../../services';
+import { readDocuments, ReadOptions } from '../../services/database';
 import { Profile } from '../models/profile';
 
 export async function readProfileDocument(

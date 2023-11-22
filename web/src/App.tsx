@@ -6,6 +6,7 @@ import { ReadShowsPage } from './pages/admin/read-shows';
 import { UpdateShowPage } from './pages/admin/update-show';
 import { Home } from './pages/home';
 import { LoginPage } from './pages/login';
+import { ShowPage } from './pages/show';
 import { SignupPage } from './pages/signup';
 import { AdminRoutes, Routes as Paths } from './shared'; 
 
@@ -25,8 +26,11 @@ export default function App() {
             path={ AdminRoutes.Show(':id') }
           />
 
+          {/* ACCOUNT ROUTES */}
           <Route element={ <LoginPage /> } path={ Paths.Login } />
           <Route element={ <SignupPage /> } path={ Paths.Signup } />
+
+          <Route element={ <ShowPage /> } path={ Paths.Show(':id') } />
 
           {/* CATCH ALL */}
           <Route element={ <div>Page not found.</div> } path="*" />

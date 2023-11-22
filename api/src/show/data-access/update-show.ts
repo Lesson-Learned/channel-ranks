@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 import { SHOW_COLLECTION } from '../../config';
-import { Update, updateDocument } from '../../services';
+import { Update, updateDocument } from '../../services/database';
 import { Show } from '../models/show';
 
 export async function updateShowDocument(
