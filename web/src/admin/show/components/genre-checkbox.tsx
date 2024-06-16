@@ -1,5 +1,5 @@
 import { Genre } from '@api';
-import { Checkbox, Label } from '@components';
+import { Checkbox, Label } from '@shared';
 import css from './genre-checkbox.module.css';
 
 interface Props {

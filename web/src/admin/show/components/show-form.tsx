@@ -1,5 +1,5 @@
 import { Countries, Genres, Networks } from '@api';
-import { FileInput, Form, Input, Label, Select, TextArea } from '@components';
+import { FileInput, Form, Input, Label, Select, TextArea } from '@shared';
 import { ShowFormInterface } from '../hooks/use-show-form';
 import { Button } from './button';
 import { GenreCheckbox } from './genre-checkbox';
@@ -13,11 +13,7 @@ interface Props {
 
 export function ShowForm({ form, handleSubmit, loading }: Props) {
   return (
-    <Form
-      className={ css.form }
-      disabled={ loading }
-      onSubmit={ handleSubmit }
-    >
+    <Form className={ css.form } onSubmit={ handleSubmit }>
       <Label className={ css.label } htmlFor="Banner" />
       <FileInput id="Banner" onChange={ form.setFileField('banner') } />
       <br />

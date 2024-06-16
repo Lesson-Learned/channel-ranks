@@ -1,7 +1,7 @@
-import { ChangeEvent, HTMLProps } from 'react';
+import { ChangeEvent } from 'react';
 
-interface Props<T extends string> extends
-  Omit<HTMLProps<HTMLSelectElement>, 'onChange'> {
+type Props<T extends string> =
+  Omit<JSX.IntrinsicElements['select'], 'onChange'> & {
   labelStyle?: string;
   labelText: string;
   onChange(value: T): void;
@@ -11,7 +11,7 @@ export function Select<T extends string>({
   labelStyle,
   labelText,
   onChange,
-  ...selectProps
+  ...props
 }: Props<T>) {
   function handleChange(event: ChangeEvent<HTMLSelectElement>) {
     onChange(event.target.value as T);
@@ -20,7 +20,7 @@ export function Select<T extends string>({
   return (
     <label className={ labelStyle }>
       { labelText }{ ' ' }
-      <select { ...selectProps } onChange={ handleChange } />
+      <select { ...props } onChange={ handleChange } />
     </label>
   );
 }

@@ -10,7 +10,7 @@ import { ShowPage } from './pages/show';
 import { SignupPage } from './pages/signup';
 import { AdminRoutes, Routes as Paths } from './shared'; 
 
-export default function App() {
+export function App() {
   return (
     <AuthProvider>
       <BrowserRouter>

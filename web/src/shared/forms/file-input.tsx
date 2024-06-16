@@ -1,16 +1,14 @@
-import { ChangeEvent, HTMLProps } from 'react';
+import { ChangeEvent } from 'react';
 
-interface Props extends Omit<HTMLProps<HTMLInputElement>, 'onChange'> {
+type Props = Omit<JSX.IntrinsicElements['input'], 'onChange' | 'type'> & {
   onChange(value: File): void;
 }
 
 export function FileInput({ onChange, ...props }: Props) {
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    if (!event.target.files?.length) {
-      return;
+    if (event.target.files?.length) {
+      onChange(event.target.files[0]);
     }
-
-    onChange(event.target.files[0]);
   }
 
   return (
