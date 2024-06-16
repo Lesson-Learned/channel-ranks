@@ -1,4 +1,5 @@
 import { createShow, readShowFilePaths } from '@api';
+import { getAuthToken } from '@auth';
 import { uploadFile } from '@cloud';
 import { ymdToMilli } from '@shared';
 import { useState } from 'react';
@@ -12,17 +13,20 @@ export function useCreateShow(form: ShowFormFields) {
       try {
         validate();
 
-        const show = await createShow({
-          country: form.country,
-          description: form.description,
-          endDate: form.endDate ? ymdToMilli(form.endDate) : undefined,
-          episodeCount: form.episodeCount,
-          genre: form.genre,
-          name: form.name,
-          network: form.network,
-          releaseDate: ymdToMilli(form.releaseDate),
-          seasonCount: form.seasonCount
-        });
+        const show = await createShow(
+          {
+            country: form.country,
+            description: form.description,
+            endDate: form.endDate ? ymdToMilli(form.endDate) : undefined,
+            episodeCount: form.episodeCount,
+            genre: form.genre,
+            name: form.name,
+            network: form.network,
+            releaseDate: ymdToMilli(form.releaseDate),
+            seasonCount: form.seasonCount
+          },
+          await getAuthToken()
+        );
         const filePaths = await readShowFilePaths(show._id);
 
         await Promise.all([

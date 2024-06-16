@@ -2,6 +2,7 @@ import { readIsAdmin } from '@api';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { ReactNode, useEffect, useState } from 'react';
 import { auth } from '../config';
+import { getAuthToken } from '../utils/get-auth-token';
 import { AuthContext } from './auth-context';
 
 interface Props {
@@ -20,7 +21,7 @@ export function AuthProvider({ children }: Props) {
 
       if (user) {
         try {
-          const isAdmin = await readIsAdmin();
+          const isAdmin = await readIsAdmin(await getAuthToken());
           setIsAdmin(isAdmin);
         } catch {
           setIsAdmin(false);

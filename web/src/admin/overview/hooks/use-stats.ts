@@ -1,4 +1,5 @@
 import { readStats, Stats } from '@api';
+import { getAuthToken } from '@auth';
 import { useEffect, useState } from 'react';
 
 export function useStats() {
@@ -8,7 +9,7 @@ export function useStats() {
   useEffect(() => {
     async function run() {
       try {
-        const stats = await readStats();
+        const stats = await readStats(await getAuthToken());
         setStats(stats);
       } catch {
         alert('Failed to load stats.');

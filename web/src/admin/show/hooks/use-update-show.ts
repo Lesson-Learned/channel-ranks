@@ -1,4 +1,5 @@
 import { updateShow } from '@api';
+import { getAuthToken } from '@auth';
 import { AdminRoutes, ymdToMilli } from '@shared';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -12,17 +13,21 @@ export function useUpdateShow(showId: string, form: ShowFormFields) {
   function handleSubmit() {
     async function handler() {
       try {
-        await updateShow(showId, {
-          country: form.country,
-          description: form.description,
-          endDate: form.endDate ? ymdToMilli(form.endDate) : undefined,
-          episodeCount: form.episodeCount,
-          genre: form.genre,
-          name: form.name,
-          network: form.network,
-          releaseDate: ymdToMilli(form.releaseDate),
-          seasonCount: form.seasonCount
-        });
+        await updateShow(
+          showId,
+          {
+            country: form.country,
+            description: form.description,
+            endDate: form.endDate ? ymdToMilli(form.endDate) : undefined,
+            episodeCount: form.episodeCount,
+            genre: form.genre,
+            name: form.name,
+            network: form.network,
+            releaseDate: ymdToMilli(form.releaseDate),
+            seasonCount: form.seasonCount
+          },
+          await getAuthToken()
+        );
 
         navigate(AdminRoutes.Shows);
       } catch {

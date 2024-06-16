@@ -1,13 +1,14 @@
-export { readStats } from './admin/handlers/read-stats';
-export type { Stats } from './admin/types';
+export { readStats } from './admin';
+export type { Stats } from './admin';
 export { Countries, Genres, Networks } from './constants';
-export { createProfile } from './profile/handlers/create-profile';
-export { readIsAdmin } from './profile/handlers/read-is-admin';
-export { createShow } from './show/handlers/create-show';
-export { deleteShow } from './show/handlers/delete-show';
-export { readShow } from './show/handlers/read-show';
-export { readShowFilePaths } from './show/handlers/read-file-paths';
-export { readShows } from './show/handlers/read-shows';
-export { updateShow } from './show/handlers/update-show';
-export type { Show, ShowFormFields } from './show/types';
-export type { Country, Genre, Network } from './types';
+export { createProfile, readIsAdmin } from './profile';
+export {
+  createShow,
+  deleteShow,
+  readShow,
+  readShowFilePaths,
+  readShows,
+  updateShow
+} from './show';
+export type { Show, ShowFormFields } from './show';
+export type { AuthToken, Country, Genre, Network } from './types';

@@ -1,4 +1,5 @@
 import { deleteShow } from '@api';
+import { getAuthToken } from '@auth';
 import { AdminRoutes } from '@shared';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +20,7 @@ export function useDeleteShow(showId: string) {
 
   async function del() {
     try {
-      await deleteShow(showId);
+      await deleteShow(showId, await getAuthToken());
 
       navigate(AdminRoutes.Shows);
     } catch {
