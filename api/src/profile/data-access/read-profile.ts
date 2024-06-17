@@ -1,6 +1,6 @@
 import { PROFILE_COLLECTION } from '../../config';
 import { readDocuments, ReadOptions } from '../../services/database';
-import { Profile } from '../models/profile';
+import { Profile } from '../models';
 
 export async function readProfileDocument(
   options: ReadOptions<Profile> = {}

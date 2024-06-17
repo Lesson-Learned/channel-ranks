@@ -1,8 +1,7 @@
-import { readIsAdmin } from '@api';
+import { Profile } from '@api';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { ReactNode, useEffect, useState } from 'react';
 import { auth } from '../config';
-import { getAuthToken } from '../utils/get-auth-token';
 import { AuthContext } from './auth-context';
 
 interface Props {
@@ -10,28 +9,22 @@ interface Props {
 }
 
 export function AuthProvider({ children }: Props) {
-  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<Profile>();
+  const [user, setUser] = useState<User>();
+
+  function updateProfile(profile: Profile | undefined) {
+    setProfile(profile);
+  }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setLoading(true);
-      setUser(user);
-
-      if (user) {
-        try {
-          const isAdmin = await readIsAdmin(await getAuthToken());
-          setIsAdmin(isAdmin);
-        } catch {
-          setIsAdmin(false);
-        }
-      } else {
-        setIsAdmin(false);
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      user => {
+        setUser(user ?? undefined);
+        setLoading(false);
       }
-
-      setLoading(false);
-    });
+    );
     
     return unsubscribe;
   }, []);
@@ -41,7 +34,11 @@ export function AuthProvider({ children }: Props) {
   }
 
   return (
-    <AuthContext.Provider value={{ isAdmin, user }}>
+    <AuthContext.Provider value={{
+      profile,
+      setProfile: updateProfile,
+      user
+    }}>
       { children }
     </AuthContext.Provider>
   );

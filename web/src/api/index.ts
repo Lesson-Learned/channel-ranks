@@ -1,7 +1,8 @@
 export { readStats } from './admin';
 export type { Stats } from './admin';
 export { Countries, Genres, Networks } from './constants';
-export { createProfile, readIsAdmin } from './profile';
+export { createProfile } from './profile';
+export type { Profile } from './profile';
 export {
   createShow,
   deleteShow,

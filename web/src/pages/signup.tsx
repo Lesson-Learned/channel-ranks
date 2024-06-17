@@ -1,14 +1,33 @@
-import { GoogleSignup, GuestGuard } from '@auth';
-import { PageTitle, Routes } from '@shared';
-import { Link } from 'react-router-dom';
+import { SetupProfile, Signup, useAuth, VerifyEmail } from '@auth';
+import { PageTitle } from '@shared';
+import { Navigate } from 'react-router-dom';
 
 export function SignupPage() {
-  return (
-    <GuestGuard>
-      <PageTitle title="Sign Up">
-        <GoogleSignup />
-        <Link to={ Routes.Login }>Login</Link>
+  const { profile, user } = useAuth();
+
+  if (profile && user?.emailVerified) {
+    return <Navigate replace to="/" />;
+  }
+
+  if (user?.emailVerified) {
+    return (
+      <PageTitle title="Setup Profile">
+        <SetupProfile />
       </PageTitle>
-    </GuestGuard>
+    );
+  }
+
+  if (user) {
+    return (
+      <PageTitle title="Verify Email">
+        <VerifyEmail />
+      </PageTitle>
+    );
+  }
+
+  return (
+    <PageTitle title="Sign Up">
+      <Signup />
+    </PageTitle>
   );
 }

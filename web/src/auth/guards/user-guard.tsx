@@ -10,9 +10,9 @@ interface Props {
 export function UserGuard({ children }: Props) {
   const { user } = useAuth();
 
-  if (user) {
+  if (user && user.emailVerified) {
     return <>{ children }</>;
   }
 
-  return <Navigate replace to={ Routes.Login } />;
+  return <Navigate replace to={ Routes.Signup } />;
 }

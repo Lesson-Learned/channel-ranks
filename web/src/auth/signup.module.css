@@ -1,0 +1,15 @@
+.form {
+  margin: 0 auto;
+  max-width: 650px;
+  padding: 1rem;
+}
+
+.input {
+  margin-bottom: 1rem;
+}
+
+.label {
+  display: block;
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}

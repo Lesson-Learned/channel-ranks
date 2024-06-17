@@ -6,10 +6,11 @@ interface Props {
   children: ReactNode;
 }
 
+// TODO - Fix this.
 export function AdminGuard({ children }: Props) {
-  const { isAdmin, user } = useAuth();
+  const { user } = useAuth();
 
-  if (isAdmin && user) {
+  if (user) {
     return <>{ children }</>;
   }
 

@@ -1,14 +1,17 @@
+import { Profile } from '@api';
 import { User } from 'firebase/auth';
 import { createContext, useContext } from 'react';
 
 interface AuthContextValues {
-  isAdmin: boolean;
-  user: User | null;
+  profile: Profile | undefined;
+  setProfile(profile: Profile | undefined): void;
+  user: User | undefined;
 }
 
 export const AuthContext = createContext<AuthContextValues>({
-  isAdmin: false,
-  user: null
+  profile: undefined,
+  setProfile() {},
+  user: undefined
 });
 
 export function useAuth() {
