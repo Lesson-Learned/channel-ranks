@@ -1,5 +1,5 @@
 import { Profile } from '@api';
-import { User } from 'firebase/auth';
+import { User } from '@libraries';
 import { createContext, useContext } from 'react';
 
 interface AuthContextValues {

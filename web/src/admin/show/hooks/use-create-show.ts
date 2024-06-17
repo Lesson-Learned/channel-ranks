@@ -1,6 +1,5 @@
-import { createShow, readShowFilePaths } from '@api';
+import { createShow } from '@api';
 import { getAuthToken } from '@auth';
-import { uploadFile } from '@cloud';
 import { ymdToMilli } from '@shared';
 import { useState } from 'react';
 import { ShowFormFields } from '../types/form';
@@ -13,7 +12,7 @@ export function useCreateShow(form: ShowFormFields) {
       try {
         validate();
 
-        const show = await createShow(
+        await createShow(
           {
             country: form.country,
             description: form.description,
@@ -27,12 +26,11 @@ export function useCreateShow(form: ShowFormFields) {
           },
           await getAuthToken()
         );
-        const filePaths = await readShowFilePaths(show._id);
 
-        await Promise.all([
-          uploadFile(form.banner!, filePaths.banner),
-          uploadFile(form.poster!, filePaths.poster),
-        ]);
+        // await Promise.all([
+        //   uploadFile(form.banner!, filePaths.banner),
+        //   uploadFile(form.poster!, filePaths.poster),
+        // ]);
       } catch {
         alert('Failed to create show.');
       } finally {

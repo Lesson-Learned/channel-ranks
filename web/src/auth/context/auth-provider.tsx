@@ -1,7 +1,6 @@
 import { Profile } from '@api';
-import { onAuthStateChanged, User } from 'firebase/auth';
+import { onAuthStateChange, User } from '@libraries';
 import { ReactNode, useEffect, useState } from 'react';
-import { auth } from '../config';
 import { AuthContext } from './auth-context';
 
 interface Props {
@@ -18,14 +17,12 @@ export function AuthProvider({ children }: Props) {
   }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(
-      auth,
-      user => {
-        setUser(user ?? undefined);
-        setLoading(false);
-      }
-    );
-    
+    const unsubscribe = onAuthStateChange(user => {
+      console.log('ON-AUTH-STATE-CHANGE', user);
+      setUser(user ?? undefined);
+      setLoading(false);
+    });
+
     return unsubscribe;
   }, []);
 

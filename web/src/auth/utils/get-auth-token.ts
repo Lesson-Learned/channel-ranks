@@ -1,12 +1,6 @@
 import { AuthToken } from '@api';
-import { auth } from '../config';
+import { getToken } from '@libraries';
 
 export async function getAuthToken(): Promise<AuthToken> {
-  const token = await auth.currentUser?.getIdToken();
-
-  if (token) {
-    return { Authorization: `Bearer ${ token }` };
-  }
-
-  throw 'No token.';
+  return { Authorization: `Bearer ${ await getToken() }` };
 }

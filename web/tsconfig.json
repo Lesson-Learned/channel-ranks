@@ -21,6 +21,7 @@
       "@auth": ["src/auth"],
       "@cloud": ["src/cloud"],
       "@home": ["src/home"],
+      "@libraries": ["src/libraries"],
       "@shared": ["src/shared"],
       "@show": ["src/show"]
     },

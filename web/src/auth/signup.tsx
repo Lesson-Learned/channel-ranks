@@ -1,3 +1,4 @@
+import { signupWithEmailAndPassword, signupWithGoogle } from '@libraries';
 import {
   Button,
   Error,
@@ -7,13 +8,6 @@ import {
   useInput,
   useStatus
 } from '@shared';
-import {
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  sendEmailVerification,
-  signInWithPopup
-} from 'firebase/auth';
-import { auth } from './config';
 import css from './signup.module.css';
 
 export function Signup() {
@@ -22,7 +16,7 @@ export function Signup() {
   const password2 = useInput();
   const status = useStatus();
 
-  function signup() {
+  function emailAndPasswordSignup() {
     if (email.empty()) {
       return email.setError('Please enter your email.');
     }
@@ -48,33 +42,25 @@ export function Signup() {
     }
 
     status.setLoading();
-    (async function() {
-      const credential = await createUserWithEmailAndPassword(
-        auth,
-        email.clean(),
-        password.get
-      );
-      await sendEmailVerification(credential.user);
-      status.setNone();
-    })()
-    .catch(status.setError);
+    signupWithEmailAndPassword(email.clean(), password.get)
+      .then(status.setNone)
+      .catch(status.setError);
   }
 
-  function signupWithGoogle() {
+  function googleSignup() {
     status.setLoading();
-    (async function() {
-      await signInWithPopup(auth, new GoogleAuthProvider());
-      status.setNone();
-    })()
-    .catch(status.setError);
+
+    signupWithGoogle()
+      .then(status.setNone)
+      .catch(status.setError);
   }
 
   return (<>
-    <Button disabled={ status.loading } onClick={ signupWithGoogle }>
+    <Button disabled={ status.loading } onClick={ googleSignup }>
       Sign up with Google
     </Button>
 
-    <Form className={ css.form } onSubmit={ signup }>
+    <Form className={ css.form } onSubmit={ emailAndPasswordSignup }>
       <Label className={ css.label } htmlFor="Email" />
       <Input
         className={ css.input }

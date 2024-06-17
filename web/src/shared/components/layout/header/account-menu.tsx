@@ -1,11 +1,12 @@
-import { logout, useAuth } from '@auth';
+import { useAuth } from '@auth';
+import { logout } from '@libraries';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { AdminRoutes, Routes } from '../../../routes';
 import css from './account-menu.module.css';
 
 export function AccountMenu() {
-  const { isAdmin, user } = useAuth();
+  const { profile, user } = useAuth();
   const dialog = useRef<HTMLDialogElement>(null);
 
   function close() {
@@ -32,7 +33,7 @@ export function AccountMenu() {
         <div className={ css.actions }>
           { user ? (
             <>
-              { isAdmin && (
+              { profile?.admin && (
                 <Link className={ css.action } to={ AdminRoutes.Home }>
                   Admin
                 </Link>

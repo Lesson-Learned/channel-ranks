@@ -1,12 +1,11 @@
+import { sendVerificationEmail } from '@libraries';
 import { Button, Error, useStatus } from '@shared';
-import { sendEmailVerification } from 'firebase/auth';
-import { auth } from './config';
 
 export function VerifyEmail() {
   const status = useStatus();
 
   function resendVerification() {
-    sendEmailVerification(auth.currentUser!).catch(status.setError);
+    sendVerificationEmail().catch(status.setError);
   }
 
   return (<>
