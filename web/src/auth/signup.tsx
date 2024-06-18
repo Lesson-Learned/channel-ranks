@@ -78,6 +78,7 @@ export function Signup() {
         id="Password"
         onChange={ password.set }
         required
+        type="password"
         value={ password.get }
       />
 
@@ -88,6 +89,7 @@ export function Signup() {
         id="Confirm Password"
         onChange={ password2.set }
         required
+        type="password"
         value={ password2.get }
       />
 

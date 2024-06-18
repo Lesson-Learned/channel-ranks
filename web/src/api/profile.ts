@@ -21,6 +21,20 @@ export async function createProfile(
   throw 'Failed to create profile.';
 }
 
+export async function readProfile(
+  token: AuthToken
+): Promise<Profile> {
+  const response = await fetch(new URL(PROFILE_URL), {
+    headers: { ...token },
+  });
+
+  if (response.status === 200) {
+    return (await response.json());
+  }
+
+  throw 'Failed to read profile.';
+}
+
 export interface Profile {
   _id: string;
   admin?: true;

@@ -1,10 +1,9 @@
 import { WithId } from 'mongodb';
-import { SHOW_COLLECTION } from '../../config';
-import { readDocuments, ReadOptions } from '../../services/database';
+import { readDocuments, ReadOptions, SHOW_COLLECTION } from '../../libraries';
 import { Show } from '../models/show';
 
-export async function readShowDocuments(
+export function readShowDocuments(
   options: ReadOptions<Show> = {}
 ): Promise<WithId<Show>[]> {
-  return await readDocuments(SHOW_COLLECTION, options);
+  return readDocuments(SHOW_COLLECTION, options);
 }

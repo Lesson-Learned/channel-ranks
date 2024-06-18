@@ -1,7 +1,6 @@
 import { ObjectId } from 'mongodb';
-import { SHOW_COLLECTION } from '../../config';
-import { deleteDocument } from '../../services/database';
+import { deleteDocument, SHOW_COLLECTION } from '../../libraries';
 
-export async function deleteShowDocument(showId: ObjectId) {
-  await deleteDocument(SHOW_COLLECTION, showId);
+export function deleteShowDocument(showId: ObjectId): Promise<void> {
+  return deleteDocument(SHOW_COLLECTION, showId);
 }

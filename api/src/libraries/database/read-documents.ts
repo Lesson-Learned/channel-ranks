@@ -1,5 +1,5 @@
 import { Document, MongoClient, WithId } from 'mongodb';
-import { DATABASE_NAME, DATABASE_URI } from '../../config';
+import { DATABASE_NAME, DATABASE_URI } from './config';
 import { ReadOptions } from './types';
 
 export async function readDocuments<D extends Document>(
@@ -11,15 +11,14 @@ export async function readDocuments<D extends Document>(
   try {
     await client.connect();
 
-    const database = client.db(DATABASE_NAME);
-    const collection = database.collection<D>(collectionName);
-
-    const docs = await collection.find({ ...options.query }, {
-      limit: options.limit,
-      sort: options.sort
-    }).toArray();
-
-    return docs;
+    return client
+      .db(DATABASE_NAME)
+      .collection<D>(collectionName)
+      .find(
+        { ...options.query },
+        { limit: options.limit, sort: options.sort }
+      )
+      .toArray();
   } finally {
     await client.close();
   }

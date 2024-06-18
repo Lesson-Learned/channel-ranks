@@ -1,11 +1,6 @@
-import { PROFILE_COLLECTION } from '../../config';
-import { readDocuments, ReadOptions } from '../../services/database';
+import { PROFILE_COLLECTION, Query, readDocument } from '../../libraries';
 import { Profile } from '../models';
 
-export async function readProfileDocument(
-  options: ReadOptions<Profile> = {}
-): Promise<Profile> {
-  const [ profile ] = await readDocuments(PROFILE_COLLECTION, options);
-
-  return profile;
+export function readProfileDocument(query: Query<Profile>): Promise<Profile> {
+  return readDocument(PROFILE_COLLECTION, query);
 }

@@ -6,17 +6,11 @@ export async function verifyAdmin(
   res: Response,
   next: NextFunction
 ) {
-  try {
-    const profile = await readProfileDocument({
-      query: { _id: req.$uid }
-    });
+  const profile = await readProfileDocument({ _id: req.$uid });
 
-    if (profile.admin) {
-      return next();
-    }
-
-    throw new Error('Profile is not an admin.');
-  } catch {
-    res.sendStatus(403);
+  if (profile.admin) {
+    next();
+  } else {
+    throw 'Profile is not an admin.';
   }
 }

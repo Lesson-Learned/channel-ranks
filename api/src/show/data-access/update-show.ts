@@ -1,11 +1,10 @@
 import { ObjectId } from 'mongodb';
-import { SHOW_COLLECTION } from '../../config';
-import { Update, updateDocument } from '../../services/database';
+import { SHOW_COLLECTION, updateDocument, Update } from '../../libraries';
 import { Show } from '../models/show';
 
-export async function updateShowDocument(
+export function updateShowDocument(
   showId: ObjectId,
   updates: Update<Show>
 ) {
-  await updateDocument(SHOW_COLLECTION, showId, updates);
+  return updateDocument(SHOW_COLLECTION, showId, updates);
 }

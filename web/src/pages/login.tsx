@@ -1,12 +1,33 @@
-import { GuestGuard } from '@auth';
+import { Login, SetupProfile, useAuth, VerifyEmail } from '@auth';
 import { PageTitle } from '@shared';
+import { Navigate } from 'react-router-dom';
 
 export function LoginPage() {
-  return (
-    <GuestGuard>
-      <PageTitle title="Login">
-        Login Page
+  const { profile, user } = useAuth();
+
+  if (profile && user?.emailVerified) {
+    return <Navigate replace to="/" />;
+  }
+
+  if (user?.emailVerified) {
+    return (
+      <PageTitle title="Setup Profile">
+        <SetupProfile />
       </PageTitle>
-    </GuestGuard>
+    );
+  }
+
+  if (user) {
+    return (
+      <PageTitle title="Verify Email">
+        <VerifyEmail />
+      </PageTitle>
+    );
+  }
+
+  return (
+    <PageTitle title="Login">
+      <Login />
+    </PageTitle>
   );
 }

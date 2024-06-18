@@ -1,4 +1,4 @@
-import { countDocuments } from '../../services/database';
+import { countDocuments } from '../../libraries';
 import { Stats } from '../types/stats';
 
 export async function readStat(

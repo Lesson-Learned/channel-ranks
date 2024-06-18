@@ -1,7 +1,6 @@
-import { PROFILE_COLLECTION } from '../../config';
-import { createDocument } from '../../services/database';
+import { createDocument, PROFILE_COLLECTION } from '../../libraries';
 import { Profile } from '../models';
 
-export async function createProfileDocument(profile: Profile) {
-  await createDocument(PROFILE_COLLECTION, profile);
+export function createProfileDocument(profile: Profile): Promise<string> {
+  return createDocument(PROFILE_COLLECTION, profile);
 }

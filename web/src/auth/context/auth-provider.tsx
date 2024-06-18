@@ -1,6 +1,7 @@
-import { Profile } from '@api';
+import { Profile, readProfile } from '@api';
 import { onAuthStateChange, User } from '@libraries';
 import { ReactNode, useEffect, useState } from 'react';
+import { getAuthToken } from '../utils/get-auth-token';
 import { AuthContext } from './auth-context';
 
 interface Props {
@@ -18,9 +19,22 @@ export function AuthProvider({ children }: Props) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChange(user => {
-      console.log('ON-AUTH-STATE-CHANGE', user);
       setUser(user ?? undefined);
-      setLoading(false);
+
+      if (user?.emailVerified) {
+        setLoading(true);
+
+        (async function() {
+          setProfile(
+            await readProfile(await getAuthToken())
+          );
+        })()
+        .catch(() => setProfile(undefined))
+        .finally(() => setLoading(false));
+      } else {
+        setLoading(false);
+        setProfile(undefined);
+      }
     });
 
     return unsubscribe;
