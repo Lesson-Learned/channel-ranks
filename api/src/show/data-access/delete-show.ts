@@ -1,6 +1,13 @@
-import { ObjectId } from 'mongodb';
-import { deleteDocument, SHOW_COLLECTION } from '../../libraries';
+import {
+  DocId,
+  deleteDocument,
+  SHOW_COLLECTION,
+  WithId
+} from '../../libraries';
+import { Show } from '../models';
 
-export function deleteShowDocument(showId: ObjectId): Promise<void> {
-  return deleteDocument(SHOW_COLLECTION, showId);
+export function deleteShowDocument(
+  _id: DocId<Show>
+): Promise<WithId<Show> | null> {
+  return deleteDocument(SHOW_COLLECTION, _id);
 }

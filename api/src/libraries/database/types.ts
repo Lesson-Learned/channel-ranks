@@ -1,4 +1,9 @@
-import { WithId } from 'mongodb';
+import {
+  Filter,
+  InferIdType,
+  UpdateFilter,
+  WithId as MongoWithId
+} from 'mongodb';
 
 export interface ReadOptions<D> {
   limit?: number;
@@ -6,8 +11,7 @@ export interface ReadOptions<D> {
   sort?: { [key: string]: -1 | 1 };
 }
 
-export type Query<D> = Partial<{ [key in keyof WithId<D>]: any }>;
-export type Update<D> = {
-  $set?: Partial<Omit<D, '_id'>>;
-  $unset?: Partial<{ [key in keyof Partial<Omit<D, '_id'>>]: '' }>
-};
+export type DocId<D> = InferIdType<D>;
+export type Query<D> = Filter<D>;
+export type Update<D> = UpdateFilter<D>;
+export type WithId<D> = MongoWithId<D>;

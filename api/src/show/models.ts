@@ -1,4 +1,4 @@
-import { Country, Genre, Network } from '../../shared';
+import { Country, Genre, Network } from '../shared';
 
 export interface Show {
   country: Country;
@@ -10,4 +10,8 @@ export interface Show {
   network: Network
   releaseDate: number;
   seasonCount: number;
+}
+
+export function buildShow(data: Show): Show {
+  return { ...data };
 }

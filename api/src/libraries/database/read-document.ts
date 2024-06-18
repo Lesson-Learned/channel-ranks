@@ -16,7 +16,7 @@ export async function readDocument<D extends Document>(
       .collection<D>(collectionName)
       .find(query)
       .toArray();
-    
+
     if (documents.length === 1) {
       return documents[0];
     }

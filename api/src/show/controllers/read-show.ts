@@ -1,15 +1,9 @@
 import { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
-import { readShowDocuments } from '../data-access/read-shows';
+import { readShowDocument } from '../data-access/read-show';
 
 export async function readShow(req: Request, res: Response) {
-  try {
-    const [show] = await readShowDocuments({
-      query: { _id: new ObjectId(req.params.id) }
-    });
+  const show = await readShowDocument(new ObjectId(req.params.id));
 
-    res.status(200).send(show);
-  } catch {
-    res.sendStatus(500);
-  }
+  res.status(200).send(show);
 }

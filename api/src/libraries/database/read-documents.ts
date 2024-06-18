@@ -15,7 +15,7 @@ export async function readDocuments<D extends Document>(
       .db(DATABASE_NAME)
       .collection<D>(collectionName)
       .find(
-        { ...options.query },
+        options.query ?? {},
         { limit: options.limit, sort: options.sort }
       )
       .toArray();

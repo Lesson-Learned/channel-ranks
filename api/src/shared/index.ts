@@ -4,4 +4,4 @@ export { authenticateUser } from './middleware/authenticate-user';
 export { errorHandler } from './middleware/error-handler';
 export { validateObject } from './validation/validate-object';
 export { validateString } from './validation/validate-string';
-export * from './types';
+export { Country, Genre, Network } from './types';

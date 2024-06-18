@@ -1,15 +1,11 @@
-import {
-  Document,
-  InferIdType,
-  MongoClient,
-  OptionalUnlessRequiredId
-} from 'mongodb';
+import { Document, MongoClient, OptionalUnlessRequiredId } from 'mongodb';
 import { DATABASE_NAME, DATABASE_URI } from './config';
+import { DocId } from './types';
 
 export async function createDocument<D extends Document>(
   collectionName: string,
   document: OptionalUnlessRequiredId<D>
-): Promise<InferIdType<D>> {
+): Promise<DocId<D>> {
   const client = new MongoClient(DATABASE_URI);
 
   try {

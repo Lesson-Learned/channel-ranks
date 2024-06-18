@@ -1,6 +1,10 @@
-import { WithId } from 'mongodb';
-import { readDocuments, ReadOptions, SHOW_COLLECTION } from '../../libraries';
-import { Show } from '../models/show';
+import {
+  readDocuments,
+  ReadOptions,
+  SHOW_COLLECTION,
+  WithId
+} from '../../libraries';
+import { Show } from '../models';
 
 export function readShowDocuments(
   options: ReadOptions<Show> = {}

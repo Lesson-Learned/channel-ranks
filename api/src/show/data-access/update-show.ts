@@ -1,10 +1,14 @@
-import { ObjectId } from 'mongodb';
-import { SHOW_COLLECTION, updateDocument, Update } from '../../libraries';
-import { Show } from '../models/show';
+import {
+  DocId,
+  SHOW_COLLECTION,
+  updateDocument,
+  Update
+} from '../../libraries';
+import { Show } from '../models';
 
 export function updateShowDocument(
-  showId: ObjectId,
+  _id: DocId<Show>,
   updates: Update<Show>
 ) {
-  return updateDocument(SHOW_COLLECTION, showId, updates);
+  return updateDocument(SHOW_COLLECTION, _id, updates);
 }

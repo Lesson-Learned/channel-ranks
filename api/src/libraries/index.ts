@@ -7,5 +7,5 @@ export { createDocument } from './database/create-document';
 export { deleteDocument } from './database/delete-document';
 export { readDocument } from './database/read-document';
 export { readDocuments } from './database/read-documents';
-export { Query, ReadOptions, Update } from './database/types';
+export { DocId, Query, ReadOptions, Update, WithId } from './database/types';
 export { updateDocument } from './database/update-document';
