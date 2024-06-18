@@ -1,5 +1,4 @@
 import { Show } from '@api';
-import { DeleteShow } from './components/delete-show';
 import { FormContainer } from './components/form-container';
 import { ShowForm } from './components/show-form';
 import { useShowForm } from './hooks/use-show-form';
@@ -15,16 +14,12 @@ export function UpdateShow({ show }: Props) {
   const { handleSubmit, loading } = useUpdateShow(show._id, form.fields);
 
   return (
-    <>
-      <FormContainer>
-        <ShowForm
-          form={ form }
-          handleSubmit={ handleSubmit }
-          loading={ loading }
-        />
-      </FormContainer>
-
-      <DeleteShow showId={ show._id } />
-    </>
+    <FormContainer>
+      <ShowForm
+        form={ form }
+        handleSubmit={ handleSubmit }
+        loading={ loading }
+      />
+    </FormContainer>
   );
 }

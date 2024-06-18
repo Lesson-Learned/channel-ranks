@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
-import { updateShowDocument } from '../data-access/update-show';
+import { updateShowDocument } from '../../show';
 
 export async function updateShow(req: Request, res: Response) {
   const updates = req.body;

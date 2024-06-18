@@ -11,7 +11,7 @@ export async function readDocuments<D extends Document>(
   try {
     await client.connect();
 
-    return client
+    const documents = await client
       .db(DATABASE_NAME)
       .collection<D>(collectionName)
       .find(
@@ -19,6 +19,8 @@ export async function readDocuments<D extends Document>(
         { limit: options.limit, sort: options.sort }
       )
       .toArray();
+
+    return documents;
   } finally {
     await client.close();
   }

@@ -10,10 +10,12 @@ export async function deleteDocument<D extends Document>(
   try {
     await client.connect();
 
-    return client
+    const document = await client
       .db(DATABASE_NAME)
       .collection<D>(collectionName)
       .findOneAndDelete({ _id: _id as any });
+    
+    return document;
   } finally {
     await client.close();
   }

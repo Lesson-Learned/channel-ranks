@@ -11,10 +11,12 @@ export async function countDocuments<D extends Document>(
   try {
     await client.connect();
 
-    return client
+    const numDocuments = await client
       .db(DATABASE_NAME)
       .collection<D>(collectionName)
       .countDocuments(query);
+
+    return numDocuments;
   } finally {
     await client.close();
   }

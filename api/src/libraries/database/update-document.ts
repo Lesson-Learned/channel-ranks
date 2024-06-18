@@ -6,13 +6,13 @@ export async function updateDocument<D extends Document>(
   collectionName: string,
   _id: InferIdType<D>,
   updates: Update<D>
-) {
+): Promise<void> {
   const client = new MongoClient(DATABASE_URI);
 
   try {
     await client.connect();
 
-    return client
+    await client
       .db(DATABASE_NAME)
       .collection(collectionName)
       .updateOne({ _id }, updates);

@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import { createShowDocument } from '../data-access/create-show';
-import { buildShow } from '../models';
+import { buildShow, createShowDocument } from '../../show';
 
 export async function createShow(req: Request, res: Response) {
   const show = buildShow(req.body);
