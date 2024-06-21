@@ -1,15 +1,16 @@
-import { Country, Genre, Network } from '../shared';
+import { Country, Genre, Network, Status } from '../shared';
 
 export interface Show {
   country: Country;
   description: string;
-  endDate?: number;
-  episodeCount: number;
+  endDate?: string;
   genre: Genre[];
   name: string;
-  network: Network
-  releaseDate: number;
-  seasonCount: number;
+  network: Network;
+  numEpisodes?: number;
+  numSeasons?: number;
+  startDate?: string;
+  status: Status;
 }
 
 export function buildShow(data: Show): Show {

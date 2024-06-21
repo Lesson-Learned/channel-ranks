@@ -9,3 +9,4 @@ export { readDocument } from './database/read-document';
 export { readDocuments } from './database/read-documents';
 export { DocId, Query, ReadOptions, Update, WithId } from './database/types';
 export { updateDocument } from './database/update-document';
+export { validateOid } from './database/validate-oid';

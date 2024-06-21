@@ -2,7 +2,7 @@ import { Show } from './show';
 import { AuthToken } from './types';
 
 export async function createShow(
-  body: ShowFormFields,
+  body: CreateShowBody,
   token: AuthToken
 ): Promise<Show> {
   const response = await fetch(new URL(`${ADMIN_URL}/shows`), {
@@ -36,7 +36,7 @@ export async function readStats(token: AuthToken): Promise<Stats> {
 
 export async function updateShow(
   id: string,
-  updates: ShowFormFields,
+  updates: CreateShowBody,
   token: AuthToken
 ): Promise<Partial<Show>> {
   const response = await fetch(new URL(`${ADMIN_URL}/shows/${id}`), {
@@ -56,16 +56,17 @@ export async function updateShow(
   throw 'Failed to update show.';
 }
 
-export type ShowFormFields = Pick<Show,
+export type CreateShowBody = Pick<Show,
   'country' |
   'description' |
   'endDate' |
-  'episodeCount' |
   'genre' |
   'name' |
   'network' |
-  'releaseDate' |
-  'seasonCount'>;
+  'numEpisodes' |
+  'numSeasons' |
+  'startDate' |
+  'status'>;
 
 export type Stats = {
   showCount: number;

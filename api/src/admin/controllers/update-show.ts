@@ -1,14 +1,15 @@
 import { Request, Response } from 'express';
-import { ObjectId } from 'mongodb';
-import { updateShowDocument } from '../../show';
+import { validateOid } from '../../libraries';
+import { readShowDocument, updateShowDocument } from '../../show';
+import { validateShowBody } from '../helpers/validate-show-body';
 
 export async function updateShow(req: Request, res: Response) {
-  const updates = req.body;
+  const showId = validateOid(req.params.id).valueOrThrow();
+  const showBody = validateShowBody(req.body);
 
-  await updateShowDocument(
-    new ObjectId(req.params.id),
-    { $set: updates }
-  );
+  const show = await readShowDocument(showId);
 
-  res.status(200).send(updates);
+  await updateShowDocument(show._id, { $set: showBody });
+
+  res.status(200).send(showBody);
 }

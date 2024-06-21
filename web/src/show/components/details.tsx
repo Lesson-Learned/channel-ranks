@@ -1,5 +1,4 @@
 import { Show } from '@api';
-import { milliToDateString } from '@shared';
 import css from './details.module.css';
 
 interface Props {
@@ -16,9 +15,9 @@ export function ShowDetails({ show }: Props) {
         <div className={ css.detail }>Genre: { show.genre.join(', ') }</div>
         <div className={ css.detail }>Network: { show.network }</div>
         <div className={ css.detail }>
-          { milliToDateString(show.releaseDate) }
+          { show.startDate }
           { ' - ' }
-          { show.endDate ? milliToDateString(show.endDate) : 'Present' }
+          { show.endDate ? show.endDate : 'Present' }
         </div>
       </div>
     </div>

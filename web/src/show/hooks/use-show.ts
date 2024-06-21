@@ -14,8 +14,7 @@ export function useShow(id: string) {
     async function run() {
       try {
         setShow(await readShow(id));
-      } catch (e) {
-        console.log(e);
+      } catch {
         setError(true);
       } finally {
         setLoading(false);

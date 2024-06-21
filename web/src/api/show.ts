@@ -1,4 +1,4 @@
-import { Country, Genre, Network } from './types';
+import { Country, Genre, Network, Status } from './types';
 
 export async function readShow(id: string): Promise<Show> {
   const response = await fetch(new URL(`${SHOWS_URL}/${id}`));
@@ -25,14 +25,15 @@ export interface Show {
   banner: string;
   country: Country;
   description: string;
-  endDate?: number;
-  episodeCount: number;
+  endDate?: string;
   genre: Genre[];
   name: string;
   network: Network;
+  numEpisodes?: number;
+  numSeasons?: number;
   poster: string;
-  releaseDate: number;
-  seasonCount: number;
+  startDate?: string;
+  status: Status;
 }
 
 const SHOWS_URL = `${import.meta.env.VITE_API_URL}/shows`;

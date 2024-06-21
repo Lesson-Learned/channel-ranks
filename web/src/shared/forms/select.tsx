@@ -1,16 +1,18 @@
 import { ChangeEvent } from 'react';
 
 type Props<T extends string> =
-  Omit<JSX.IntrinsicElements['select'], 'onChange'> & {
-  labelStyle?: string;
+  Omit<JSX.IntrinsicElements['select'], 'onChange' | 'value'> & {
+  labelClassName?: string;
   labelText: string;
   onChange(value: T): void;
+  value: T | undefined;
 }
 
 export function Select<T extends string>({
-  labelStyle,
+  labelClassName,
   labelText,
   onChange,
+  value,
   ...props
 }: Props<T>) {
   function handleChange(event: ChangeEvent<HTMLSelectElement>) {
@@ -18,9 +20,9 @@ export function Select<T extends string>({
   }
 
   return (
-    <label className={ labelStyle }>
+    <label className={ labelClassName }>
       { labelText }{ ' ' }
-      <select { ...props } onChange={ handleChange } />
+      <select { ...props } onChange={ handleChange } value={ value } />
     </label>
   );
 }
