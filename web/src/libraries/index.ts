@@ -9,3 +9,4 @@ export {
   signupWithEmailAndPassword,
   signupWithGoogle
 } from './auth/utils';
+export { uploadFile } from './cloud/upload-file';

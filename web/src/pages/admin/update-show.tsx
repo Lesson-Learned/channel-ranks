@@ -6,21 +6,21 @@ import { useParams } from 'react-router-dom';
 
 export function UpdateShowPage() {
   const showId = useParams().id ?? '';
-  const showData = useShow(showId);
+  const { loading, show } = useShow(showId);
 
-  if (showData.loading) {
+  if (show) {
+    return (
+      <AdminGuard>
+        <PageTitle title={ show.name }>
+          <UpdateShow show={ show } />
+        </PageTitle>
+      </AdminGuard>
+    );
+  }
+
+  if (loading) {
     return <div>Loading TV Show.</div>;
   }
 
-  if (showData.error || !showData.show) {
-    return <div>Failed to load TV Show</div>;
-  }
-
-  return (
-    <AdminGuard>
-      <PageTitle title={ showData.show.name }>
-        <UpdateShow show={ showData.show } />
-      </PageTitle>
-    </AdminGuard>
-  );
+  return <div>Failed to load TV Show.</div>;
 }

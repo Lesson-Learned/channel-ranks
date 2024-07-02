@@ -2,7 +2,7 @@ import { useAuth } from '@auth';
 import { logout } from '@libraries';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { AdminRoutes, Routes } from '../../../routes';
+import { adminRoutes, routes } from '../../../routes';
 import { AccountMenu } from './account-menu';
 import css from './navigation.module.css';
 
@@ -22,7 +22,7 @@ export function Navigation() {
     <>
       <nav className={ css.links }>
         <Link className={ css.link } to="/">Home</Link>
-        <Link className={ css.link } to={ Routes.Shows }>Shows</Link>
+        <Link className={ css.link } to={ routes.shows }>Shows</Link>
         <AccountMenu />
       </nav>
 
@@ -38,12 +38,12 @@ export function Navigation() {
         </div>
 
         <Link className={ css.dialogLink } to="/">Home</Link>
-        <Link className={ css.dialogLink } to={ Routes.Shows }>Shows</Link>
+        <Link className={ css.dialogLink } to={ routes.shows }>Shows</Link>
 
         { user ? (
           <>
             { profile?.admin && (
-              <Link className={ css.dialogLink } to={ AdminRoutes.Home }>
+              <Link className={ css.dialogLink } to={ adminRoutes.home }>
                 Admin
               </Link>
             )}
@@ -53,10 +53,10 @@ export function Navigation() {
           </>
         ) : (
           <>
-            <Link className={ css.dialogLink } to={ Routes.Login }>
+            <Link className={ css.dialogLink } to={ routes.login }>
               Log In
             </Link>
-            <Link className={ css.dialogLink } to={ Routes.Signup }>
+            <Link className={ css.dialogLink } to={ routes.signup }>
               Sign Up
             </Link>
           </>

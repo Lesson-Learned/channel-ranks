@@ -1,24 +1,23 @@
 import { readShows, Show } from '@api';
+import { useStatus } from '@shared';
 import { useEffect, useState } from 'react';
 
 export function useShows() {
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [shows, setShows] = useState<Show[] | null>(null);
+  const [shows, setShows] = useState<Show[]>();
+  const status = useStatus('loading');
 
   useEffect(() => {
-    async function run() {
-      try {
-        setShows(await readShows());
-      } catch {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    run();
+    (async function() {
+      const shows = await readShows();
+      
+      setShows(shows);
+      status.setNone();
+    })()
+    .catch(status.setError);
   }, []);
 
-  return { error, loading, shows };
+  return {
+    loading: status.loading,
+    shows
+  };
 }

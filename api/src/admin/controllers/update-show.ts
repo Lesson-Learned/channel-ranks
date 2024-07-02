@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
-import { validateOid } from '../../libraries';
+import {
+  getShowBannerPath,
+  getShowPosterPath,
+  validateOid
+} from '../../libraries';
 import { readShowDocument, updateShowDocument } from '../../show';
 import { validateShowBody } from '../helpers/validate-show-body';
 
@@ -11,5 +15,11 @@ export async function updateShow(req: Request, res: Response) {
 
   await updateShowDocument(show._id, { $set: showBody });
 
-  res.status(200).send(showBody);
+  res.status(200).send({
+    paths: {
+      banner: getShowBannerPath(showId.toString()),
+      poster: getShowPosterPath(showId.toString())
+    },
+    show: { _id: show._id, ...showBody }
+  });
 }

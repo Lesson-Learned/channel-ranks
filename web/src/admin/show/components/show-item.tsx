@@ -1,5 +1,5 @@
 import { Show } from '@api';
-import { AdminRoutes } from '@shared';
+import { adminRoutes } from '@shared';
 import { Link } from 'react-router-dom';
 import css from './show-item.module.css';
 
@@ -9,9 +9,7 @@ interface Props {
 
 export function ShowItem({ show }: Props) {
   return (
-    <Link
-      className={ css.container }
-      to={ AdminRoutes.Show(show._id) }>
+    <Link className={ css.container } to={ adminRoutes.show(show._id) }>
       { show.name }
     </Link>
   );

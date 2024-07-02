@@ -1,28 +1,23 @@
 import { readShow, Show } from '@api';
+import { useStatus } from '@shared';
 import { useEffect, useState } from 'react';
 
 export function useShow(id: string) {
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [show, setShow] = useState<Show | null>(null);
+  const [show, setShow] = useState<Show>();
+  const status = useStatus('loading');
 
   useEffect(() => {
-    if (!id) {
-      return setLoading(false);
-    }
+    (async function() {
+      const show = await readShow(id);
 
-    async function run() {
-      try {
-        setShow(await readShow(id));
-      } catch {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    run();
+      setShow(show);
+      status.setNone();
+    })()
+    .catch(status.setError);
   }, [id]);
 
-  return { error, loading, show };
+  return {
+    loading: status.loading,
+    show
+  };
 }

@@ -18,7 +18,7 @@ export async function createProfile(
     throw (await response.json());
   }
 
-  throw 'Failed to create profile.';
+  throw new Error('Failed to create profile.');
 }
 
 export async function readProfile(
@@ -32,7 +32,7 @@ export async function readProfile(
     return (await response.json());
   }
 
-  throw 'Failed to read profile.';
+  throw new Error('Failed to read profile.');
 }
 
 export interface Profile {

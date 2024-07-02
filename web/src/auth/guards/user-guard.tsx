@@ -1,4 +1,4 @@
-import { Routes } from '@shared';
+import { routes } from '@shared';
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/auth-context';
@@ -14,5 +14,5 @@ export function UserGuard({ children }: Props) {
     return <>{ children }</>;
   }
 
-  return <Navigate replace to={ Routes.Signup } />;
+  return <Navigate replace to={ routes.signup } />;
 }

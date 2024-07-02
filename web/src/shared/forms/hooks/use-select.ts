@@ -9,6 +9,15 @@ export function useSelect<T extends string>(init?: T) {
     setValue(init);
   }
 
+  function isValid(): boolean {
+    if (value) {
+      return true;
+    }
+
+    setError('Please select a value.');
+    return false;
+  }
+
   function updateError(error: string) {
     setError(error);
   }
@@ -21,6 +30,7 @@ export function useSelect<T extends string>(init?: T) {
     clear,
     error,
     get: value,
+    isValid,
     set: updateValue,
     setError: updateError
   };

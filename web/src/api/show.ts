@@ -7,7 +7,7 @@ export async function readShow(id: string): Promise<Show> {
     return (await response.json());
   }
 
-  throw 'Failed to read show.';
+  throw new Error('Failed to read show.');
 }
 
 export async function readShows(): Promise<Show[]> {
@@ -17,7 +17,7 @@ export async function readShows(): Promise<Show[]> {
     return (await response.json());
   }
 
-  throw 'Failed to read shows.';
+  throw new Error('Failed to read shows.');
 }
 
 export interface Show {

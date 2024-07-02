@@ -1,9 +1,13 @@
 import { Request, Response } from 'express';
-import { ObjectId } from 'mongodb';
+import { validateOid } from '../../libraries';
 import { readShowDocument } from '../data-access/read-show';
+import { getClientShows } from '../helpers/get-client-shows';
 
 export async function readShow(req: Request, res: Response) {
-  const show = await readShowDocument(new ObjectId(req.params.id));
+  const showId = validateOid(req.params.id).valueOrThrow();
 
-  res.status(200).send(show);
+  const show = await readShowDocument(showId);
+  const [clientShow] = await getClientShows([show]);
+
+  res.status(200).send(clientShow);
 }

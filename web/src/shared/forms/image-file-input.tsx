@@ -1,10 +1,10 @@
 import { ChangeEvent } from 'react';
 
 type Props = Omit<JSX.IntrinsicElements['input'], 'onChange' | 'type'> & {
-  onChange(value: File): void;
-}
+  onChange(file: File): void;
+};
 
-export function FileInput({ onChange, ...props }: Props) {
+export function ImageFileInput({ onChange, ...props }: Props) {
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     if (event.target.files?.length) {
       onChange(event.target.files[0]);
@@ -14,6 +14,7 @@ export function FileInput({ onChange, ...props }: Props) {
   return (
     <input
       { ...props }
+      accept=".jpeg, .jpg, .png"
       onChange={ handleChange }
       type="file"
     />

@@ -2,21 +2,25 @@ import { useShows } from '@show';
 import { ShowItem } from './components/show-item';
 
 export function ReadShows() {
-  const showData = useShows();
+  const { loading, shows } = useShows();
 
-  if (showData.loading) {
+  if (shows) {
+    if (shows.length) {
+      return (
+        <div>
+          { shows.map(show => (
+            <ShowItem key={ show._id } show={ show } />
+          ))}
+        </div>
+      );
+    }
+
+    return <div>No shows found.</div>;
+  }
+
+  if (loading) {
     return <div>Loading TV Shows.</div>;
   }
 
-  if (showData.error || !showData.shows) {
-    return <div>Failed to load TV shows.</div>;
-  }
-
-  return (
-    <section>
-      { showData.shows.map(show => (
-        <ShowItem key={ show._id } show={ show } />
-      ))}
-    </section>
-  );
+  return <div>Failed to load TV shows.</div>;
 }

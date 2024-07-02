@@ -1,5 +1,5 @@
-export { createShow, readStats, updateShow } from './admin';
-export type { CreateShowBody, Stats } from './admin';
+export { createShow, updateShow } from './admin';
+export type { CreateShowBody } from './admin';
 export { createProfile, readProfile } from './profile';
 export type { Profile } from './profile';
 export { readShow, readShows } from './show';

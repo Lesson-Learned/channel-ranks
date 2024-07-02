@@ -4,7 +4,7 @@ import { AuthToken } from './types';
 export async function createShow(
   body: CreateShowBody,
   token: AuthToken
-): Promise<Show> {
+): Promise<CreateShowResponse> {
   const response = await fetch(new URL(`${ADMIN_URL}/shows`), {
     body: JSON.stringify(body),
     headers: { ...token },
@@ -19,26 +19,14 @@ export async function createShow(
     throw (await response.json());
   }
 
-  throw 'Failed to create show.';
-}
-
-export async function readStats(token: AuthToken): Promise<Stats> {
-  const response = await fetch(new URL(`${ADMIN_URL}/stats`), {
-    headers: { ...token }
-  });
-
-  if (response.status === 200) {
-    return (await response.json());
-  }
-
-  throw 'Failed to read stats.';
+  throw new Error('Failed to create show.');
 }
 
 export async function updateShow(
   id: string,
   updates: CreateShowBody,
   token: AuthToken
-): Promise<Partial<Show>> {
+): Promise<UpdateShowResponse> {
   const response = await fetch(new URL(`${ADMIN_URL}/shows/${id}`), {
     body: JSON.stringify(updates),
     headers: { ...token },
@@ -53,7 +41,7 @@ export async function updateShow(
     throw (await response.json());
   }
 
-  throw 'Failed to update show.';
+  throw new Error('Failed to update show.');
 }
 
 export type CreateShowBody = Pick<Show,
@@ -68,8 +56,20 @@ export type CreateShowBody = Pick<Show,
   'startDate' |
   'status'>;
 
-export type Stats = {
-  showCount: number;
+type CreateShowResponse = {
+  paths: {
+    banner: string;
+    poster: string;
+  };
+  show: Show;
+};
+
+type UpdateShowResponse = {
+  paths: {
+    banner: string;
+    poster: string;
+  };
+  show: Show;
 };
 
 const ADMIN_URL = `${import.meta.env.VITE_API_URL}/admin`;

@@ -17,6 +17,15 @@ export function useInput(init = '') {
     return !value.trim().length;
   }
 
+  function isValid(): boolean {
+    if (value.trim().length) {
+      return true;
+    }
+
+    setError('Please enter a value.');
+    return false;
+  }
+
   function reset() {
     setError('');
     setValue(init);
@@ -36,6 +45,7 @@ export function useInput(init = '') {
     empty,
     error,
     get: value,
+    isValid,
     reset,
     set: updateValue,
     setError: updateError

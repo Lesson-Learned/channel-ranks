@@ -1,3 +1,4 @@
+import { WithId } from '../libraries';
 import { Country, Genre, Network, Status } from '../shared';
 
 export interface Show {
@@ -11,6 +12,11 @@ export interface Show {
   numSeasons?: number;
   startDate?: string;
   status: Status;
+}
+
+export interface ClientShow extends WithId<Show> {
+  banner: string;
+  poster: string;
 }
 
 export function buildShow(data: Show): Show {

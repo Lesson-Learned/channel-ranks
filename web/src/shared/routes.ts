@@ -1,17 +1,21 @@
-export const AdminRoutes = {
-  AddShow: '/admin/shows/add',
-  Home: '/admin',
-  Show(id: string) {
-    return `/admin/shows/${ id }`;
+const ROOT_ADMIN_ROUTE = '/admin';
+
+export const adminRoutes = {
+  addShow: `${ROOT_ADMIN_ROUTE}/shows/add`,
+  home: ROOT_ADMIN_ROUTE,
+  shows: `${ROOT_ADMIN_ROUTE}/shows`,
+
+  show(id: string) {
+    return `${this.shows}/${id}`;
   },
-  Shows: '/admin/shows'
 };
 
-export const Routes = {
-  Login: '/login',
-  Show(id: string) {
-    return `/shows/${ id }`;
-  },
-  Shows: '/shows',
-  Signup: '/signup'
+export const routes = {
+  login: '/login',
+  shows: '/shows',
+  signup: '/signup',
+
+  show(id: string) {
+    return `${this.shows}/${id}`;
+  }
 };

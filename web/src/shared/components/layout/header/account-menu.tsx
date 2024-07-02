@@ -2,7 +2,7 @@ import { useAuth } from '@auth';
 import { logout } from '@libraries';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { AdminRoutes, Routes } from '../../../routes';
+import { adminRoutes, routes } from '../../../routes';
 import css from './account-menu.module.css';
 
 export function AccountMenu() {
@@ -34,7 +34,7 @@ export function AccountMenu() {
           { user ? (
             <>
               { profile?.admin && (
-                <Link className={ css.action } to={ AdminRoutes.Home }>
+                <Link className={ css.action } to={ adminRoutes.home }>
                   Admin
                 </Link>
               )}
@@ -44,8 +44,8 @@ export function AccountMenu() {
             </>
           ) : (
             <>
-              <Link className={ css.action } to={ Routes.Login }>Log In</Link>
-              <Link className={ css.action } to={ Routes.Signup }>
+              <Link className={ css.action } to={ routes.login }>Log In</Link>
+              <Link className={ css.action } to={ routes.signup }>
                 Sign Up
               </Link>
             </>
