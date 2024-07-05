@@ -11,7 +11,7 @@ router.use('/admin', authenticateUser(), authenticateAdmin(), adminRouter);
 router.use('/profile', profileRouter);
 router.use('/shows', showRouter);
 router.use('*', (req: Request, res: Response) => {
-  throw `Route [${req.originalUrl}] does not exist.`;
+  throw new Error(`Route [${req.originalUrl}] does not exist.`);
 });
 
 export { router };

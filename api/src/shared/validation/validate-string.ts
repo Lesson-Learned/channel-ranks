@@ -2,33 +2,37 @@ export function validateString(value: unknown): StringValidator {
   if (typeof value === 'string') {
     return {
       value,
-      match(pattern) {
+
+      match(pattern): StringValidator {
         if (this.value && pattern.test(this.value)) {
           return this;
         }
 
         return withError('String does not match pattern.');
       },
-      required() {
+
+      required(): StringValidator {
         if (this.value?.length) {
           return this;
         }
   
         return withError('Empty string.');
       },
-      trim() {
+
+      trim(): StringValidator {
         if (this.value) {
           this.value = this.value.trim();
         }
 
         return this;
       },
-      valueOrThrow(error) {
+
+      valueOrThrow(error): string {
         if (this.value) {
           return this.value;
         }
   
-        throw error ?? this.error;
+        throw new Error(error ?? this.error);
       }
     };
   }
@@ -39,26 +43,26 @@ export function validateString(value: unknown): StringValidator {
 function withError(error: string): StringValidator {
   return {
     error,
-    required() {
+    required(): StringValidator {
       return this;
     },
-    match() {
+    match(): StringValidator {
       return this;
     },
-    trim() {
+    trim(): StringValidator {
       return this;
     },
     valueOrThrow(error) {
-      throw error ?? this.error;
+      throw new Error(error ?? this.error);
     },
   };
 }
 
-interface StringValidator {
+type StringValidator = {
   error?: string;
   match(pattern: RegExp): StringValidator;
   required(): StringValidator;
   trim(): StringValidator;
   value?: string;
   valueOrThrow(error?: string): string;
-}
+};

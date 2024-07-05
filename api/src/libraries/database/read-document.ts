@@ -21,7 +21,7 @@ export async function readDocument<D extends Document>(
       return documents[0];
     }
 
-    throw 'Single document query did not return one document.';
+    throw new Error('Single document query did not return one document.');
   } finally {
     await client.close();
   }

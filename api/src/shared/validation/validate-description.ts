@@ -1,4 +1,4 @@
-import { formError } from '../errors/form-error';
+import { clientFormError } from '../errors/client-form-error';
 import { validateString } from './validate-string';
 
 export function validateDescription(value: unknown): string {
@@ -8,5 +8,5 @@ export function validateDescription(value: unknown): string {
     return description.value;
   }
 
-  throw formError({ description: 'Invalid description.' });
+  throw clientFormError({ description: 'Invalid description.' });
 }

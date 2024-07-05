@@ -6,8 +6,8 @@ import { getClientShows } from '../helpers/get-client-shows';
 export async function readShow(req: Request, res: Response) {
   const showId = validateOid(req.params.id).valueOrThrow();
 
-  const show = await readShowDocument(showId);
-  const [clientShow] = await getClientShows([show]);
+  const showDocument = await readShowDocument(showId);
+  const [clientShow] = await getClientShows([showDocument]);
 
   res.status(200).send(clientShow);
 }

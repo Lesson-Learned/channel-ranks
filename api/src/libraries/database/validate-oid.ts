@@ -10,12 +10,12 @@ export function validateOid(value: unknown): OidValidator {
             return this.value;
           }
 
-          throw error ?? 'Invalid ObjectId.';
+          throw new Error(error ?? 'Invalid ObjectId.');
         },
       };
     }
 
-    throw 'Invalid ID.'; 
+    throw new Error('Invalid ID.'); 
   } catch {
     return withError('Invalid ObjectId.');
   }
@@ -30,8 +30,8 @@ function withError(error: string): OidValidator {
   };
 }
 
-interface OidValidator {
+type OidValidator = {
   error?: string;
   value?: ObjectId;
   valueOrThrow(error?: string): ObjectId;
-}
+};

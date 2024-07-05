@@ -1,7 +1,9 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { getUid } from '../../libraries';
 
-export function authenticateUser(optional = false) {
+export function authenticateUser(
+  isAuthenticationOptional = false
+): RequestHandler {
   return function handler(
     req: Request,
     res: Response,
@@ -11,13 +13,12 @@ export function authenticateUser(optional = false) {
       const token = req.headers.authorization?.replace('Bearer ', '');
     
       if (token) {
-        const uid = await getUid(token);
-        req.$uid = uid;
+        req.$uid = await getUid(token);
         next();
       } else {
-        throw 'No token provided.';
+        throw new Error('No token provided.');
       }
     })()
-    .catch(e => optional ? next() : next(e));
+    .catch(e => isAuthenticationOptional ? next() : next(e));
   };
 }

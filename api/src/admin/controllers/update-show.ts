@@ -5,21 +5,21 @@ import {
   validateOid
 } from '../../libraries';
 import { readShowDocument, updateShowDocument } from '../../show';
-import { validateShowBody } from '../helpers/validate-show-body';
+import { validateShowRequestBody } from '../helpers/validate-show-body';
 
 export async function updateShow(req: Request, res: Response) {
   const showId = validateOid(req.params.id).valueOrThrow();
-  const showBody = validateShowBody(req.body);
+  const showBody = validateShowRequestBody(req.body);
 
-  const show = await readShowDocument(showId);
+  const showDocument = await readShowDocument(showId);
 
-  await updateShowDocument(show._id, { $set: showBody });
+  await updateShowDocument(showDocument._id, { $set: showBody });
 
   res.status(200).send({
     paths: {
-      banner: getShowBannerPath(showId.toString()),
-      poster: getShowPosterPath(showId.toString())
+      banner: getShowBannerPath(showDocument._id.toString()),
+      poster: getShowPosterPath(showDocument._id.toString())
     },
-    show: { _id: show._id, ...showBody }
+    show: showBody
   });
 }

@@ -1,20 +1,22 @@
-export function validateArray<T>(value: unknown): ArrayValidator {
+export function validateArray(value: unknown): ArrayValidator {
   if (Array.isArray(value)) {
     return {
       value,
-      required() {
+
+      required(): ArrayValidator {
         if (this.value?.length) {
           return this;
         }
   
         return withError('Empty array.');
       },
-      valueOrThrow(error) {
+
+      valueOrThrow(error): unknown[] {
         if (this.value) {
           return this.value;
         }
   
-        throw error ?? this.error;
+        throw new Error(error ?? this.error);
       }
     };
   }
@@ -29,14 +31,14 @@ function withError(error: string): ArrayValidator {
       return this;
     },
     valueOrThrow(error) {
-      throw error ?? this.error;
+      throw new Error(error ?? this.error);
     },
   };
 }
 
-interface ArrayValidator {
+type ArrayValidator = {
   error?: string;
   required(): ArrayValidator;
   value?: unknown[];
   valueOrThrow(error?: string): unknown[];
-}
+};

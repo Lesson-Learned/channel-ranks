@@ -1,5 +1,5 @@
-import { formError } from '../errors/form-error';
-import { Genre, GENRE_VALUE_MAP } from '../types';
+import { clientFormError } from '../errors/client-form-error';
+import { Genre, GENRES } from '../types';
 import { validateArray } from './validate-array';
 
 export function validateGenre(value: unknown): Genre[] {
@@ -9,7 +9,7 @@ export function validateGenre(value: unknown): Genre[] {
     const genres: Genre[] = [];
 
     for (const item of list.value) {
-      const genre = GENRE_VALUE_MAP[item as Genre];
+      const genre = GENRE_VALUE_INDEX[item as Genre];
 
       if (genre) {
         genres.push(genre);
@@ -21,5 +21,15 @@ export function validateGenre(value: unknown): Genre[] {
     }
   }
 
-  throw formError({ genre: 'Invalid genre.' });
+  throw clientFormError({ genre: 'Invalid genre.' });
 }
+
+const GENRE_VALUE_INDEX = {
+  [GENRES[0]]: GENRES[0],
+  [GENRES[1]]: GENRES[1],
+  [GENRES[2]]: GENRES[2],
+  [GENRES[3]]: GENRES[3],
+  [GENRES[4]]: GENRES[4],
+  [GENRES[5]]: GENRES[5],
+  [GENRES[6]]: GENRES[6]
+} as const;

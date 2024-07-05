@@ -11,14 +11,16 @@ export async function getClientShows(shows: WithId<Show>[]) {
   const promises: Promise<void>[] = [];
     
   for (const clientShow of clientShows) {
-    promises.push(getShowBannerUrl(clientShow._id.toString())
-      .then(url => { clientShow.banner = url; })
-      .catch(() => {})
+    promises.push(
+      getShowBannerUrl(clientShow._id.toString())
+        .then(url => { clientShow.banner = url; })
+        .catch(() => {})
     );
 
-    promises.push(getShowPosterUrl(clientShow._id.toString())
-      .then(url => { clientShow.poster = url; })
-      .catch(() => {})
+    promises.push(
+      getShowPosterUrl(clientShow._id.toString())
+        .then(url => { clientShow.poster = url; })
+        .catch(() => {})
     );
   }
 

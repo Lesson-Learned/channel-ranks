@@ -4,33 +4,37 @@ export function validateNumber(value: unknown): NumberValidator {
   if (!isNaN(number)) {
     return {
       value: number,
-      default(num) {
+
+      default(num): number {
         if (this.value) {
           return this.value;
         }
   
         return num;
       },
-      max(num) {
+
+      max(num): NumberValidator {
         if (this.value && this.value <= num) {
           return this;
         }
   
         return withError('Number is greater than maximum.');
       },
-      min(num) {
+
+      min(num): NumberValidator {
         if (this.value && this.value >= num) {
           return this;
         }
   
         return withError('Number is less than minimum.');
       },
-      valueOrThrow(error) {
+
+      valueOrThrow(error): number {
         if (this.value) {
           return this.value;
         }
   
-        throw error ?? this.error;
+        throw new Error(error ?? this.error);
       }
     };
   }
@@ -41,26 +45,26 @@ export function validateNumber(value: unknown): NumberValidator {
 function withError(error: string): NumberValidator {
   return {
     error,
-    default(num) {
+    default(num): number {
       return num;
     },
-    max() {
+    max(): NumberValidator {
       return this;
     },
-    min() {
+    min(): NumberValidator {
       return this;
     },
     valueOrThrow(error) {
-      throw error ?? this.error;
+      throw new Error(error ?? this.error);
     }
   };
 }
 
-interface NumberValidator {
+type NumberValidator = {
   error?: string;
   default(num: number): number;
   max(num: number): NumberValidator;
   min(num: number): NumberValidator;
   value?: number;
   valueOrThrow(error?: string): number;
-}
+};

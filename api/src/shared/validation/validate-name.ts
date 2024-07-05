@@ -1,4 +1,4 @@
-import { formError } from '../errors/form-error';
+import { clientFormError } from '../errors/client-form-error';
 import { validateString } from './validate-string';
 
 export function validateName(value: unknown): string {
@@ -8,5 +8,5 @@ export function validateName(value: unknown): string {
     return name.value;
   }
 
-  throw formError({ name: 'Invalid name.' });
+  throw clientFormError({ name: 'Invalid name.' });
 }

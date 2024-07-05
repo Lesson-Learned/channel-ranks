@@ -1,7 +1,7 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { readProfileDocument } from '../../profile';
 
-export function authenticateAdmin() {
+export function authenticateAdmin(): RequestHandler {
   return function handler(
     req: Request,
     res: Response,
@@ -13,7 +13,7 @@ export function authenticateAdmin() {
       if (profile.admin) {
         next();
       } else {
-        throw 'Profile is not an admin.';
+        throw new Error('Profile is not an admin.');
       }
     })()
     .catch(next);

@@ -1,5 +1,5 @@
 import {
-  formError,
+  clientFormError,
   STATUS,
   Status,
   validateCountry,
@@ -8,126 +8,94 @@ import {
   validateName,
   validateNetwork,
   validateNumber,
-  validateObject,
   validateStatus,
   validateString
 } from '../../shared';
 import { Show } from '../../show';
 
-export function validateShowBody(body: unknown): Show {
-  const cleanBody = validateObject(body).valueOrThrow(
-    'Request body is not an object.'
-  );
+export function validateShowRequestBody(body: any): Show {
+  const status = validateStatus(body.status);
 
-  if (
-    'country' in cleanBody &&
-    'description' in cleanBody &&
-    'genre' in cleanBody &&
-    'name' in cleanBody &&
-    'network' in cleanBody &&
-    'status' in cleanBody
-  ) {
-    const status = validateStatus(cleanBody.status);
-
-    return {
-      country: validateCountry(cleanBody.country),
-      description: validateDescription(cleanBody.description),
-      endDate: validateEndDate(cleanBody, status),
-      genre: validateGenre(cleanBody.genre),
-      name: validateName(cleanBody.name),
-      numEpisodes: validateNumEpisodes(cleanBody, status),
-      numSeasons: validateNumSeasons(cleanBody, status),
-      network: validateNetwork(cleanBody.network),
-      startDate: validateStartDate(cleanBody, status),
-      status
-    };
-  }
-
-  throw 'Request body missing properties.';
+  return {
+    country: validateCountry(body.country),
+    description: validateDescription(body.description),
+    endDate: validateEndDate(body, status),
+    genre: validateGenre(body.genre),
+    name: validateName(body.name),
+    numEpisodes: validateNumEpisodes(body, status),
+    numSeasons: validateNumSeasons(body, status),
+    network: validateNetwork(body.network),
+    startDate: validateStartDate(body, status),
+    status
+  };
 }
 
-function validateEndDate(body: object, status: Status): string | undefined {
+function validateEndDate(body: any, status: Status): string | undefined {
   if (status === STATUS.UPCOMING) {
     return;
   }
 
-  if ('endDate' in body) {
-    const endDate = validateString(body.endDate).match(/^\d{4}-\d{2}-\d{2}$/);
+  const endDate = validateString(body.endDate).match(/^\d{4}-\d{2}-\d{2}$/);
 
-    if (endDate.value) {
-      return endDate.value;
-    }
-
-    throw formError({ endDate: 'Invalid end date.' });
+  if (endDate.value) {
+    return endDate.value;
   }
 
   if (status === STATUS.ONGOING) {
     return;
   }
 
-  throw formError({ endDate: 'Invalid end date.' });
+  throw clientFormError({ endDate: 'Invalid end date.' });
 }
 
 function validateNumEpisodes(
-  body: object,
+  body: any,
   status: Status
 ): number | undefined {
-  if ('numEpisodes' in body) {
-    const numEpisodes = validateNumber(body.numEpisodes).min(1);
+  const numEpisodes = validateNumber(body.numEpisodes).min(1);
 
-    if (numEpisodes.value) {
-      return numEpisodes.value;
-    }
-
-    throw formError({ numEpisodes: 'Invalid number of episodes.' });
+  if (numEpisodes.value) {
+    return numEpisodes.value;
   }
 
   if (status === STATUS.UPCOMING) {
     return;
   }
 
-  throw formError({ numEpisodes: 'Invalid number of episodes.' });
+  throw clientFormError({ numEpisodes: 'Invalid number of episodes.' });
 }
 
 function validateNumSeasons(
-  body: object,
+  body: any,
   status: Status
 ): number | undefined {
-  if ('numSeasons' in body) {
-    const numSeasons = validateNumber(body.numSeasons).min(1);
+  const numSeasons = validateNumber(body.numSeasons).min(1);
 
-    if (numSeasons.value) {
-      return numSeasons.value;
-    }
-
-    throw formError({ numSeasons: 'Invalid number of seasons.' });
+  if (numSeasons.value) {
+    return numSeasons.value;
   }
 
   if (status === STATUS.UPCOMING) {
     return;
   }
 
-  throw formError({ numSeasons: 'Invalid number of seasons.' });
+  throw clientFormError({ numSeasons: 'Invalid number of seasons.' });
 }
 
-function validateStartDate(body: object, status: Status): string | undefined {
-  if ('startDate' in body) {
-    const startDate = validateString(body.startDate).match(
-      status === STATUS.UPCOMING
-        ? /^\d{4}(-\d{2})?(-\d{2})?$/
-        : /^\d{4}-\d{2}-\d{2}$/
-    );
+function validateStartDate(body: any, status: Status): string | undefined {
+  const startDate = validateString(body.startDate).match(
+    status === STATUS.UPCOMING
+      ? /^\d{4}(-\d{2})?(-\d{2})?$/
+      : /^\d{4}-\d{2}-\d{2}$/
+  );
 
-    if (startDate.value) {
-      return startDate.value;
-    }
-
-    throw formError({ startDate: 'Invalid start date.' });
+  if (startDate.value) {
+    return startDate.value;
   }
 
   if (status === STATUS.UPCOMING) {
     return;
   }
 
-  throw formError({ startDate: 'Invalid start date.' });
+  throw clientFormError({ startDate: 'Invalid start date.' });
 }
