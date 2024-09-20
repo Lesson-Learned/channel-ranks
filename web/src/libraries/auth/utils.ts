@@ -17,17 +17,17 @@ export async function getToken(): Promise<string> {
     return token;
   }
 
-  throw 'No token.';
+  throw new Error('No token.');
 }
 
 export async function loginWithEmailAndPassword(
   email: string,
   password: string
-) {
+): Promise<void> {
   await signInWithEmailAndPassword(auth, email, password);
 }
 
-export async function loginWithGoogle() {
+export async function loginWithGoogle(): Promise<void> {
   await signInWithPopup(auth, new GoogleAuthProvider());
 }
 
@@ -46,13 +46,13 @@ export function sendVerificationEmail(): Promise<void> {
     return sendEmailVerification(auth.currentUser);
   }
 
-  throw 'Failed to send verification email.';
+  throw new Error('Failed to send verification email.');
 }
 
 export async function signupWithEmailAndPassword(
   email: string,
   password: string
-) {
+): Promise<void> {
   const credential = await createUserWithEmailAndPassword(
     auth,
     email,
@@ -62,6 +62,6 @@ export async function signupWithEmailAndPassword(
   await sendEmailVerification(credential.user);
 }
 
-export async function signupWithGoogle() {
+export async function signupWithGoogle(): Promise<void> {
   await signInWithPopup(auth, new GoogleAuthProvider());
 }

@@ -4,10 +4,6 @@ import { ReactNode, useEffect, useState } from 'react';
 import { getAuthToken } from '../utils/get-auth-token';
 import { AuthContext } from './auth-context';
 
-interface Props {
-  children: ReactNode;
-}
-
 export function AuthProvider({ children }: Props) {
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState<Profile>();
@@ -54,3 +50,7 @@ export function AuthProvider({ children }: Props) {
     </AuthContext.Provider>
   );
 }
+
+type Props = {
+  children: ReactNode;
+};

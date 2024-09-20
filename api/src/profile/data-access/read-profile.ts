@@ -8,6 +8,6 @@ import { Profile } from '../models';
 
 export function readProfileDocument(
   _id: DocId<Profile>
-): Promise<WithId<Profile>> {
-  return readDocument(PROFILE_COLLECTION, { _id });
+): Promise<WithId<Profile> | null> {
+  return readDocument<Profile>(PROFILE_COLLECTION, { _id });
 }

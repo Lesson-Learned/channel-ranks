@@ -1,20 +1,12 @@
-import { Login, SetupProfile, useAuth, VerifyEmail } from '@auth';
+import { Login, useAuth, VerifyEmail } from '@auth';
 import { PageTitle } from '@shared';
 import { Navigate } from 'react-router-dom';
 
 export function LoginPage() {
-  const { profile, user } = useAuth();
-
-  if (profile && user?.emailVerified) {
-    return <Navigate replace to="/" />;
-  }
+  const { user } = useAuth();
 
   if (user?.emailVerified) {
-    return (
-      <PageTitle title="Setup Profile">
-        <SetupProfile />
-      </PageTitle>
-    );
+    return <Navigate replace to="/" />;
   }
 
   if (user) {

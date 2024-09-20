@@ -1,35 +1,44 @@
 import { loginWithEmailAndPassword, loginWithGoogle } from '@libraries';
 import {
   Button,
+  cleanInputString,
   Error,
   Form,
   Input,
-  Label,
-  useInput,
+  isStringEmpty,
   useStatus
 } from '@shared';
+import { useState } from 'react';
 
 export function Login() {
-  const email = useInput();
-  const password = useInput();
+  const [email, setEmail] = useState('');
+  const [errors, setErrors] = useState<string[]>([]);
+  const [password, setPassword] = useState('');
+
   const status = useStatus();
 
-  function emailAndPasswordLogin() {
-    if (email.empty()) {
-      return email.setError('Please enter your email.');
+  function loginViaEmailAndPassword() {
+    const errors: string[] = [];
+
+    if (isStringEmpty(email)) {
+      errors.push('Please enter your email.');
     }
 
-    if (password.empty()) {
-      return password.setError('Please enter your password.');
+    if (isStringEmpty(password)) {
+      errors.push('Please enter your password.');
+    }
+
+    if (errors.length) {
+      return setErrors(errors);
     }
 
     status.setLoading();
-    loginWithEmailAndPassword(email.clean(), password.get)
+    loginWithEmailAndPassword(cleanInputString(email), password)
       .then(status.setNone)
       .catch(status.setError);
   }
 
-  function googleLogin() {
+  function loginViaGoogle() {
     status.setLoading();
     loginWithGoogle()
       .then(status.setNone)
@@ -37,39 +46,43 @@ export function Login() {
   }
 
   return (<>
-    <Button disabled={ status.loading } onClick={ googleLogin }>
+    <Button disabled={ status.loading } onClick={ loginViaGoogle }>
       Login with Google
     </Button>
 
-    <Form onSubmit={ emailAndPasswordLogin }>
-      <Label htmlFor="Email" />
+    <Form onSubmit={ loginViaEmailAndPassword }>
+      <label htmlFor={ emailInputId }>Email</label>
       <Input
         disabled={ status.loading }
-        id="Email"
-        onChange={ email.set }
+        id={ emailInputId }
+        onChange={ setEmail }
         required
-        value={ email.get }
+        value={ email }
       />
 
-      <Label htmlFor="Password" />
+      <label htmlFor={ passwordInputId }>Password</label>
       <Input
         disabled={ status.loading }
-        id="Password"
-        onChange={ password.set }
+        id={ passwordInputId }
+        onChange={ setPassword }
         required
         type="password"
-        value={ password.get }
+        value={ password }
       />
 
-      { email.error && <Error message={ email.error } /> }
-      { password.error && <Error message={ password.error } /> }
+      { errors.map(error => (
+        <Error key={ error } message={ error } />
+      ))}
       { status.error && <Error message="Something went wrong." /> }
 
       <Button
-        disabled={ email.empty() || password.empty() || status.loading }
+        disabled={ !email || !password || status.loading }
         type="submit">
         Login
       </Button>
     </Form>
   </>);
 }
+
+const emailInputId = 'email';
+const passwordInputId = 'password';

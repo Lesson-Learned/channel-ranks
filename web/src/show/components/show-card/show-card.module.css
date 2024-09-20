@@ -1,0 +1,14 @@
+.container {
+  flex: 0 0 auto;
+  width: 200px;
+}
+
+.name {
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.poster {
+  height: 300px;
+  width: 100%;
+}

@@ -8,8 +8,8 @@ import {
 import { useParams } from 'react-router-dom';
 
 export function ShowPage() {
-  const showId = useParams().id ?? '';
-  const { loading, show } = useShow(showId);
+  const { showId } = useParams();
+  const { loading, show } = useShow(showId ?? '');
 
   if (show) {
     return (

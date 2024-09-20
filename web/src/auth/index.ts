@@ -1,9 +1,6 @@
 export { useAuth } from './context/auth-context';
 export { AuthProvider } from './context/auth-provider';
-export { AdminGuard } from './guards/admin-guard';
-export { UserGuard } from './guards/user-guard';
 export { Login } from './login';
-export { SetupProfile } from './setup-profile';
 export { Signup } from './signup';
 export { getAuthToken } from './utils/get-auth-token';
 export { VerifyEmail } from './verify-email';

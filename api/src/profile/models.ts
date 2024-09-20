@@ -1,12 +1,9 @@
 export interface Profile {
   _id: string;
-  admin?: true;
-  name: string;
 }
 
-export function buildProfile(uid: string, name: string): Profile {
+export function buildProfile(uid: string): Profile {
   return {
-    _id: uid,
-    name
+    _id: uid
   };
 }

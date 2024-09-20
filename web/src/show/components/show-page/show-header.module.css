@@ -1,0 +1,17 @@
+.container {
+  margin-bottom: 2rem;
+}
+
+.description {
+  color: var(--text-color);
+  font-size: 1.25rem;
+  font-weight: 500;
+  max-width: 700px;
+  width: 100%;
+}
+
+.name {
+  color: var(--text-color);
+  font-size: 10vmin;
+  margin-bottom: 1rem;
+}

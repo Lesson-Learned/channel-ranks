@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 
-type Props<T extends string> =
+type Props<T> =
   Omit<JSX.IntrinsicElements['select'], 'onChange' | 'value'> & {
   labelClassName?: string;
   labelText: string;
@@ -8,7 +8,7 @@ type Props<T extends string> =
   value: T | undefined;
 }
 
-export function Select<T extends string>({
+export function Select<T extends number | string>({
   labelClassName,
   labelText,
   onChange,

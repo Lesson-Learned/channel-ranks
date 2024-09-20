@@ -1,13 +1,9 @@
-import { ContentContainer, Intro, PageContainer } from '@home';
-import { ShowRow } from '@show';
+import { MainHeader } from '@shared';
 
 export function Home() {
   return (
-    <PageContainer>
-      <Intro />
-      <ContentContainer>
-        <ShowRow />
-      </ContentContainer>
-    </PageContainer>
+    <>
+      <MainHeader />
+    </>
   );
 }

@@ -1,53 +1,56 @@
 import { signupWithEmailAndPassword, signupWithGoogle } from '@libraries';
 import {
   Button,
+  cleanInputString,
   Error,
   Form,
   Input,
-  Label,
-  useInput,
+  isStringEmpty,
   useStatus
 } from '@shared';
-import css from './signup.module.css';
+import { useState } from 'react';
 
 export function Signup() {
-  const email = useInput();
-  const password = useInput();
-  const password2 = useInput();
+  const [email, setEmail] = useState('');
+  const [errors, setErrors] = useState<string[]>([]);
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
+
   const status = useStatus();
 
-  function emailAndPasswordSignup() {
-    if (email.empty()) {
-      return email.setError('Please enter your email.');
+  function signupViaEmailAndPassword() {
+    const errors: string[] = [];
+
+    if (isStringEmpty(email)) {
+      errors.push('Please enter your email.');
     }
 
-    if (password.empty()) {
-      return password.setError('Please enter a password.');
+    if (isStringEmpty(password)) {
+      errors.push('Please enter a password.');
+    }
+    else if (password.length < minimumPasswordLength) {
+      errors.push(
+        `Password must be at least ${minimumPasswordLength} characters.`
+      );
+    }
+    else if (isStringEmpty(password2)) {
+      errors.push('Please confirm your password.');
+    }
+    else if (password !== password2) {
+      errors.push('Passwords do not match.');
     }
 
-    if (!password.get.trim()) {
-      return password.setError('Please use a stronger password.');
-    }
-
-    if (password.get.length < 8) {
-      return password.setError('Password must be at least 8 characters.');
-    }
-
-    if (password2.empty()) {
-      return password.setError('Please confirm your password.');
-    }
-
-    if (password.get !== password2.get) {
-      return password.setError('Passwords do not match.');
+    if (errors.length) {
+      return setErrors(errors);
     }
 
     status.setLoading();
-    signupWithEmailAndPassword(email.clean(), password.get)
+    signupWithEmailAndPassword(cleanInputString(email), password)
       .then(status.setNone)
       .catch(status.setError);
   }
 
-  function googleSignup() {
+  function signupViaGoogle() {
     status.setLoading();
 
     signupWithGoogle()
@@ -56,57 +59,55 @@ export function Signup() {
   }
 
   return (<>
-    <Button disabled={ status.loading } onClick={ googleSignup }>
+    <Button disabled={ status.loading } onClick={ signupViaGoogle }>
       Sign up with Google
     </Button>
 
-    <Form className={ css.form } onSubmit={ emailAndPasswordSignup }>
-      <Label className={ css.label } htmlFor="Email" />
+    <Form onSubmit={ signupViaEmailAndPassword }>
+      <label htmlFor={ emailInputId }>Email</label>
       <Input
-        className={ css.input }
         disabled={ status.loading }
-        id="Email"
-        onChange={ email.set }
+        id={ emailInputId }
+        onChange={ setEmail }
         required
-        value={ email.get }
+        value={ email }
       />
 
-      <Label className={ css.label } htmlFor="Password" />
+      <label htmlFor={ passwordInputId }>Password</label>
       <Input
-        className={ css.input }
         disabled={ status.loading }
-        id="Password"
-        onChange={ password.set }
+        id={ passwordInputId }
+        onChange={ setPassword }
         required
         type="password"
-        value={ password.get }
+        value={ password }
       />
 
-      <Label className={ css.label } htmlFor="Confirm Password" />
+      <label htmlFor={ passwordInputId2 }>Confirm Password</label>
       <Input
-        className={ css.input }
         disabled={ status.loading }
-        id="Confirm Password"
-        onChange={ password2.set }
+        id={ passwordInputId2 }
+        onChange={ setPassword2 }
         required
         type="password"
-        value={ password2.get }
+        value={ password2 }
       />
 
-      { email.error && <Error message={ email.error } /> }
-      { password.error && <Error message={ password.error } /> }
+      { errors.map(error => (
+        <Error key={ error } message={ error } />
+      ))}
       { status.error && <Error message="Something went wrong." /> }
 
       <Button
-        disabled={
-          email.empty() ||
-          password.empty() ||
-          password2.empty() ||
-          status.loading
-        }
+        disabled={ !email || !password || !password2 || status.loading }
         type="submit">
         Sign Up
       </Button>
     </Form>
   </>);
 }
+
+const emailInputId = 'email';
+const minimumPasswordLength = 8;
+const passwordInputId = 'password';
+const passwordInputId2 = 'password2';

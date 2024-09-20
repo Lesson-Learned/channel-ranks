@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.detail {
+  color: var(--text-color);
+  font-size: 1.2rem;
+}
+
+.poster {
+  height: 300px;
+  width: 200px;
+}
