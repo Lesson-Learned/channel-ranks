@@ -1,13 +1,19 @@
 import { WithId } from '../libraries';
-import { Country, Genre, Network, Status } from '../shared';
+import { ProfileShowStatus } from '../profile';
+import { Country, Genre, Network, Rating, Status } from '../shared';
+
+export interface ClientShow extends WithId<Show> {
+  poster?: string;
+}
 
 export interface Episode {
-  // Constructed from the show ID, the season and episode number.
+  // Constructed from the show ID, the season, and episode number.
   _id: string;
   description: string;
   duration: number;
   name: string;
   releaseDate: number;
+  views: number;
 }
 
 export interface Show {
@@ -17,24 +23,10 @@ export interface Show {
   genre: Genre[];
   name: string;
   network: Network;
+  numberOfEachProfileShowStatus: Record<ProfileShowStatus, number>;
+  numberOfEachRating: Record<Rating, number>;
   // Index indicates the season, element indicates number of episodes.
   seasons: number[];
   startDate?: number;
   status: Status;
-}
-
-export interface ClientShow extends WithId<Show> {
-  banner: string;
-  poster: string;
-}
-
-export function buildEpisode(data: Episode): Episode {
-  return { ...data };
-}
-
-export function buildShow(data: Omit<Show, 'seasons'>): Show {
-  return {
-    ...data,
-    seasons: []
-  };
 }

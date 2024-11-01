@@ -1,18 +1,40 @@
-import { GenreSelector, useSearchQuery } from '@shared';
-import { ShowCard, useShows } from '@show';
+import { 
+  CountryFilter,
+  GenreFilter,
+  MainHeader,
+  NetworkFilter,
+  StatusFilter,
+  useFilters
+} from '@shared';
+import { Shows, useShows } from '@show';
 
 export function ShowsPage() {
-  const { genre, setGenre, urlQuery } = useSearchQuery();
-  const { error, loading, shows } = useShows(urlQuery);
+  const filters = useFilters();
+  const shows = useShows(filters);
 
   return (<>
-    <GenreSelector genre={ genre } setGenre={ setGenre } />
-
-    { loading && <div>Loading...</div> }
-    { shows.length > 0 && shows.map(show => (
-      <ShowCard key={ show._id } show={ show } />
-    ))}
-    { !error && !shows.length && <div>No shows found.</div> }
-    { error && <div>Failed to load shows.</div> }
+    <MainHeader />
+    <CountryFilter
+      country={ filters.country }
+      setCountry={ filters.setCountry }
+    />
+    <GenreFilter
+      genre={ filters.genre }
+      setGenre={ filters.setGenre }
+    />
+    <NetworkFilter
+      network={ filters.network }
+      setNetwork={ filters.setNetwork }
+    />
+    <StatusFilter
+      setStatus={ filters.setStatus }
+      status={ filters.status }
+    />
+    <Shows shows={ shows.shows } />
+    { shows.shows.length < shows.numberOfShows && (
+      <button onClick={ shows.getNextShows }>
+        Load More
+      </button>
+    )}
   </>);
 }

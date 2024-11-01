@@ -3,8 +3,8 @@ import { DATABASE_NAME, DATABASE_URI } from './config';
 
 export async function readDocument<D extends Document>(
   collectionName: string,
-  _id: Filter<D>['_id']
-): Promise<WithId<D> | null> {
+  query: Filter<D>
+): Promise<WithId<D>> {
   const client = new MongoClient(DATABASE_URI);
 
   try {
@@ -13,9 +13,13 @@ export async function readDocument<D extends Document>(
     const document = await client
       .db(DATABASE_NAME)
       .collection<D>(collectionName)
-      .findOne(_id);
+      .findOne(query);
 
-    return document;
+    if (document) {
+      return document;
+    }
+
+    throw new Error('No document found.');
   } finally {
     await client.close();
   }

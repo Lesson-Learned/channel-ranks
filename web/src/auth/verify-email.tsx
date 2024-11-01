@@ -1,11 +1,14 @@
 import { sendVerificationEmail } from '@libraries';
 import { Button, Error, useStatus } from '@shared';
+import { useAuth } from './context/auth-context';
 
 export function VerifyEmail() {
+  const { user } = useAuth();
   const status = useStatus();
 
   function reloadPage() {
-    window.location.reload();
+    user?.getIdToken(true)
+      .then(() => window.location.reload());
   }
 
   function resendVerification() {
@@ -22,7 +25,7 @@ export function VerifyEmail() {
 
     <div>
       When your email is verified,
-      <Button onClick={ reloadPage }>Reload This Page</Button>
+      <Button onClick={ reloadPage }>Next</Button>
     </div>
 
     { status.error && (

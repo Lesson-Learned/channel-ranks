@@ -1,7 +1,13 @@
 export { getUid } from './auth/get-uid';
-export { getShowBannerPath, getShowPosterPath } from './cloud/paths';
-export { readUrl } from './cloud/read-url';
 export {
+  getProfilePhotoPath,
+  getShowBannerPath,
+  getShowPosterPath
+} from './cloud/paths';
+export { readFileUrl } from './cloud/read-file-url';
+export { aggregate } from './database/aggregate';
+export {
+  COMMENT_COLLECTION,
   EPISODE_COLLECTION,
   PROFILE_COLLECTION,
   SHOW_COLLECTION
@@ -12,6 +18,13 @@ export { createDocument } from './database/create-document';
 export { deleteDocument } from './database/delete-document';
 export { readDocument } from './database/read-document';
 export { readDocuments } from './database/read-documents';
-export { DocId, Query, ReadOptions, Update, WithId } from './database/types';
+export {
+  DocId,
+  Query,
+  ReadOptions,
+  Update,
+  UpdateOptions,
+  WithId
+} from './database/types';
 export { updateDocument } from './database/update-document';
-export { validateObjectId } from './database/validate-object-id';
+export { updateDocuments } from './database/update-documents';

@@ -4,7 +4,8 @@ import { createContext, useContext } from 'react';
 
 export const AuthContext = createContext<AuthContextValues>({
   profile: undefined,
-  setProfile() {},
+  setProfileName() {},
+  setProfilePhoto() {},
   user: undefined
 });
 
@@ -14,6 +15,7 @@ export function useAuth(): AuthContextValues {
 
 type AuthContextValues = {
   profile: Profile | undefined;
-  setProfile(profile: Profile | undefined): void;
+  setProfileName(name: string): void;
+  setProfilePhoto(photo: string): void;
   user: User | undefined;
 };

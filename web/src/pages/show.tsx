@@ -1,30 +1,15 @@
-import { PageTitle } from '@shared';
-import {
-  ShowDetails,
-  ShowHeader,
-  ShowPageContainer,
-  useShow
-} from '@show';
+import { Episodes, ProfileShow, Show, useShow } from '@show';
 import { useParams } from 'react-router-dom';
 
 export function ShowPage() {
-  const { showId } = useParams();
-  const { loading, show } = useShow(showId ?? '');
+  const params = useParams();
+  const showId = String(params.showId);
 
-  if (show) {
-    return (
-      <PageTitle title={ show.name }>
-        <ShowPageContainer show={ show }>
-          <ShowHeader show={ show } />
-          <ShowDetails show={ show } />
-        </ShowPageContainer>
-      </PageTitle>
-    );
-  }
+  const showData = useShow(showId);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  return <div>Failed to load show.</div>;
+  return (<>
+    <Show { ...showData } />
+    <ProfileShow showId={ showId } />
+    { showData.show && <Episodes show={ showData.show } /> }
+  </>);
 }

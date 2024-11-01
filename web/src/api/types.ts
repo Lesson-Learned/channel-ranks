@@ -11,15 +11,30 @@ export const COUNTRIES = [
 ] as const;
 
 export const GENRES = [
+  'action',
+  'adventure',
+  'animation',
+  'comedy',
   'crime',
+  'dark comedy',
   'drama',
   'fantasy',
+  'mystery',
+  'psychological',
+  'romance',
+  'satire',
+  'spy',
+  'superhero',
   'thriller'
 ] as const;
 
 export const NETWORKS = [
+  'Amazon Prime Video',
   'AMC',
+  'BBC America',
   'HBO',
+  'Netflix',
+  'Nickelodeon'
 ] as const;
 
 export const STATUSES = [

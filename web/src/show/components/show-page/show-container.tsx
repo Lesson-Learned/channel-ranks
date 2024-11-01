@@ -8,7 +8,7 @@ export function ShowPageContainer({ children, show }: Props) {
       style={{
         backgroundImage:
           `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
-          url(${ show.banner })`
+          url(${ 'show.banner' })`
       }}>
       { children }
     </div>

@@ -9,4 +9,5 @@ export {
   signupWithEmailAndPassword,
   signupWithGoogle
 } from './auth/utils';
+export { getProfilePhotoPath } from './cloud/file-paths';
 export { uploadFile } from './cloud/upload-file';

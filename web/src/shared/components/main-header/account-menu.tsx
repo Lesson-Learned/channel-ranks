@@ -17,8 +17,14 @@ export function AccountMenu() {
 
     <Modal closeModal={ closeModal } modalRef={ modalRef }>
       <h2 className={ css.greeting }>
-        Hello{ profile ? `, ${ profile.name }` : '' }
+        Hello{ profile?.name && `, ${ profile.name }` }
       </h2>
+
+      { profile && (
+        <Link className={ css.action } to={ routes.myProfile }>
+          Profile
+        </Link>
+      )}
 
       { user ? (
         <button className={ css.action } onClick={ logout }>

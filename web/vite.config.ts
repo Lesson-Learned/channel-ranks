@@ -12,6 +12,7 @@ export default defineConfig({
       '@auth': resolve(__dirname, './src/auth'),
       '@cloud': resolve(__dirname, './src/cloud'),
       '@libraries': resolve(__dirname, './src/libraries'),
+      '@profile': resolve(__dirname, './src/profile'),
       '@shared': resolve(__dirname, './src/shared'),
       '@show': resolve(__dirname, './src/show')
     }

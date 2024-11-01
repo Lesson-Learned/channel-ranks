@@ -34,14 +34,14 @@ export function Login() {
 
     status.setLoading();
     loginWithEmailAndPassword(cleanInputString(email), password)
-      .then(status.setNone)
+      .then(status.clear)
       .catch(status.setError);
   }
 
   function loginViaGoogle() {
     status.setLoading();
     loginWithGoogle()
-      .then(status.setNone)
+      .then(status.clear)
       .catch(status.setError);
   }
 

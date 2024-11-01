@@ -46,7 +46,7 @@ export function Signup() {
 
     status.setLoading();
     signupWithEmailAndPassword(cleanInputString(email), password)
-      .then(status.setNone)
+      .then(status.clear)
       .catch(status.setError);
   }
 
@@ -54,7 +54,7 @@ export function Signup() {
     status.setLoading();
 
     signupWithGoogle()
-      .then(status.setNone)
+      .then(status.clear)
       .catch(status.setError);
   }
 

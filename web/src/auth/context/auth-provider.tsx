@@ -9,8 +9,12 @@ export function AuthProvider({ children }: Props) {
   const [profile, setProfile] = useState<Profile>();
   const [user, setUser] = useState<User>();
 
-  function updateProfile(profile: Profile | undefined) {
-    setProfile(profile);
+  function setProfileName(name: string) {
+    setProfile(profile => ({ ...profile!, name }));
+  }
+
+  function setProfilePhoto(photo: string) {
+    setProfile(profile => ({ ...profile!, photo }));
   }
 
   useEffect(() => {
@@ -21,9 +25,10 @@ export function AuthProvider({ children }: Props) {
         setLoading(true);
 
         (async function() {
-          setProfile(
-            await readProfile(await getAuthToken())
-          );
+          const token = await getAuthToken();
+          const profile = await readProfile(token);
+
+          setProfile(profile);
         })()
         .catch(() => setProfile(undefined))
         .finally(() => setLoading(false));
@@ -43,7 +48,8 @@ export function AuthProvider({ children }: Props) {
   return (
     <AuthContext.Provider value={{
       profile,
-      setProfile: updateProfile,
+      setProfileName,
+      setProfilePhoto,
       user
     }}>
       { children }

@@ -2,6 +2,7 @@ import {
   Filter,
   InferIdType,
   UpdateFilter,
+  UpdateOptions as MongoUpdateOptions,
   WithId as MongoWithId
 } from 'mongodb';
 
@@ -13,4 +14,5 @@ export type ReadOptions<D> = {
   sort?: { [key in keyof D]: -1 | 1 };
 };
 export type Update<D> = UpdateFilter<D>;
+export type UpdateOptions = MongoUpdateOptions;
 export type WithId<D> = MongoWithId<D>;

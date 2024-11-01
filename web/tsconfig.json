@@ -20,6 +20,7 @@
       "@auth": ["src/auth"],
       "@cloud": ["src/cloud"],
       "@libraries": ["src/libraries"],
+      "@profile": ["src/profile"],
       "@shared": ["src/shared"],
       "@show": ["src/show"]
     },
